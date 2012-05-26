@@ -15,8 +15,8 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
         ModUtil::setVar('DbtDiary', 'modulestylesheet', 'style.css');
         ModUtil::setVar('DbtDiary', 'adminEmail', '');
 
-        if ( !DBUtil::createTable('DbtDiary_Diary') ) return false;
-        DBUtil::createIndex('DbtDiary_Diary_Iud', 'DbtDiary_Diary', 
+        if ( !DBUtil::createTable('dbtdiary_diary') ) return false;
+        DBUtil::createIndex('dbtdiary_diary_Iud', 'dbtdiary_diary', 
                 array('uid', 'date'));
 
         return true;
@@ -40,7 +40,7 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
     public function uninstall()
     {
         ModUtil::delVar('DbtDiary');
-        if ( !DBUtil::dropTable('DbtDiary_Diary') ) return false;
+        if ( !DBUtil::dropTable('dbtdiary_diary') ) return false;
         return true;
     }
 }
