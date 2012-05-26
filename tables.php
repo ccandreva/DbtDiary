@@ -49,7 +49,7 @@ function DbtDiary_tables()
   );
 
   $tables['dbtdiary_diary_column_def'] = array(
-    'id'	=> 'I UNSIGNED NOTNULL PRIMARY',
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'uid'     => 'I UNSIGNED NOTNULL',
     'date'    => 'T NOTNULL',
     'hurt'	=>	'I1',
