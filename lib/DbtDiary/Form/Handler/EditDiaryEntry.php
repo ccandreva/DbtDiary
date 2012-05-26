@@ -13,7 +13,7 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
-    var $date, $uid, $id, $insert;
+    var $date, $uid, $id, $insert, $sqldate;
     var $emotions = array('hurt', 'good', 'tense', 'miserable', 'panic', 
         'overwhelmed', 'angry', 'sad', 'hopeful', 'alone', 'distracted', 
         'bad', 'guilty', 'unreal');
@@ -24,16 +24,21 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
     public function __construct(&$args)
     {
         $this->uid = $args['uid'];
-        if (isset($args['date']))
-            $this->date = $args['date'];
-        else
-            $this->date = date('Y-m-d');
+        if (isset($args['date'])) 
+        {
+            $d = $args['date'];
+            if (!is_numeric($d)) $d = strtotime($d);
+            $this->date = $d;
+        } else {
+            $this->date = time();
+        }
+        $this->sqldate = date('Y-m-d', $this->date);
     }
     
     public function initialize(Zikula_Form_View $view)
     {
         $emlist = DbtDiary_Util::InitListValues(range(0,9));
-        $where = "diary_uid=$this->uid and diary_date='$this->date'";
+        $where = "diary_uid=$this->uid and diary_date='$this->sqldate'";
         $data = DBUtil::selectObjectArray ('dbtdiary_diary',$where);
         if (isset($data[0])) {
                $this->view->assign($data[0]);
@@ -56,13 +61,23 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
     
     public function handleCommand(Zikula_Form_View $view, &$args)
     {    
-      if (!$this->view->isValid()) return false;
+        $command = $args['commandName'];
+        
+        if (!$this->view->isValid()) return false;
+        $formData = $this->view->getValues();
 
-      $formData = $this->view->getValues();
+        if ($command == 'Jump') {
+            $jumpdate = strtotime($formData['jumpdate']);
+            return $this->view->redirect (
+                    ModUtil::url('DbtDiary', 'user','editdiaryentry',
+                            array('date' => $jumpdate))
+                    );
+        }
+
       
-        $formData['uid'] = $this->uid;
-        $formData['date'] = $this->date;
         if ($this->insert) {
+            $formData['uid'] = $this->uid;
+            $formData['date'] = $this->sqldate;
             DBUtil::insertObject($formData,'dbtdiary_diary' );
             LogUtil::registerStatus("Entry Added.");
         } else {

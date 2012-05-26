@@ -1,5 +1,5 @@
 
-<h1>{gt text="DBT Diary for "}{$date}</h1>
+<h1>{gt text="DBT Diary for "}{$date|date_format}</h1>
 
 {* include file="dbtdiary_user_menu.tpl" *}
 
@@ -8,19 +8,29 @@
 
 {nocache}
 {form cssClass="z-form"}
-{formvalidationsummary}
+    <a href="{modurl modname="dbtdiary" func="editdiaryentry"
+        date=$date-86400}">Yesterday</a>
 
-<fieldset>
-    <legend>{gt text="Diary"}</legend>
-    <p class="z-formnote z-informationmsg">
-        <strong>Comments About the Day</strong>
-    </p>
-    <div class="z-formrow">
-        {formlabel for="comments" __text="Comments:" mandatorysym=0}
-        {formtextinput textMode="multiline" rows="4" cols="50"
-            maxLength="2048" id="comments"}
-    </div>
-</fieldset>
+    {formdateinput id="jumpdate" width=6em}
+    {formbutton commandName="Jump" __text="Edit Date" }
+        
+    <a href="{modurl modname="dbtdiary" func="editdiaryentry"
+        date=$date+86400}">Tomorrow</a>
+        <br />
+        {formvalidationsummary}
+
+
+    <fieldset class="z-linear">
+        <legend>{gt text="Diary"}</legend>
+        <p class="z-formnote z-informationmsg">
+            <strong>Comments About the Day</strong>
+        </p>
+        <div class="z-formrow">
+            {*formlabel for="comments" __text="Comments:" mandatorysym=0*}
+            {formtextinput textMode="multiline" rows="4" cols="50"
+                maxLength="2048" id="comments"}
+        </div>
+    </fieldset>
 
     <fieldset id="Emotions" class="z-linear dbt-grid">
     <legend>{gt text="Emotions"}</legend>

@@ -31,11 +31,12 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         }
         $uid = UserUtil::getVar('uid');
         $GLOBALS['info']['title'] = 'DbtDiary :: Edit Entry';
-
+        $date = FormUtil :: getPassedValue('date');
         $view = FormUtil::newForm('DbtDiary', $this);
 
         $tmplfile = 'dbtdiary_user_editdiaryentry.tpl';
         $args = array('uid' => $uid);
+        if ($date) $args['date'] = $date;
         $formobj = new DbtDiary_Form_Handler_EditDiaryEntry($args);
         $output = $view->execute($tmplfile, $formobj);
         return $output;
