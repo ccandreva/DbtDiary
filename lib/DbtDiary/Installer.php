@@ -12,44 +12,35 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
 {
     public function install()
     {
-        ModUtil::setVar('wiifriends', 'modulestylesheet', 'wiifriends.css');
-        ModUtil::setVar('wiifriends', 'adminEmail', '');
+        ModUtil::setVar('DbtDiary', 'modulestylesheet', 'style.css');
+        ModUtil::setVar('DbtDiary', 'adminEmail', '');
 
-        if ( !DBUtil::createTable('wiifriends_console') ) return false;
-        if ( !DBUtil::createTable('wiifriends_wfc') ) return false;
-        DBUtil::createIndex('wiifriends_wfc_Igames', 'wiifriends_wfc', 'game');
-        if ( !DBUtil::createTable('wiifriends_games') ) return false;
-
+        if ( !DBUtil::createTable('DbtDiary_Diary') ) return false;
+        DBUtil::createIndex('DbtDiary_Diary_Iud', 'DbtDiary_Diary', 
+                array('uid', 'date'));
 
         return true;
     }
 
     public function upgrade($oldversion)
     {
+/*
         switch($oldversion) {
-            case "1.0" :
-                ModUtil::setVar('wiifriends', 'adminEmail', '');
-
-                case "1.1" :
-                case "1.1.1" :
-
-            /* This break should be after the last upgrade */
+            case "0.0" :
+             // This break should be after the last upgrade
                 break;
-
             default:
                 SessionUtil::setVar('errormsg', __("An unknown version is installed!") );
                 return false;
         }
-
+*/
         return true;
     }
 
     public function uninstall()
     {
-        ModUtil::delVar('wiifriends');
-        if ( !DBUtil::dropTable('wiifriends_console') ) return false;
-        if ( !DBUtil::dropTable('wiifriends_wfc') ) return false;
-        if ( !DBUtil::dropTable('wiifriends_games') ) return false;
+        ModUtil::delVar('DbtDiary');
+        if ( !DBUtil::dropTable('DbtDiary_Diary') ) return false;
         return true;
     }
 }
