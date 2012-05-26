@@ -13,9 +13,7 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
-    var $date;
-    var $uid;
-    var $id;
+    var $date, $uid, $id, $insert;
     var $emotions = array('hurt', 'good', 'tense', 'miserable', 'panic', 
         'overwhelmed', 'angry', 'sad', 'hopeful', 'alone', 'distracted', 
         'bad', 'guilty', 'unreal');
@@ -40,6 +38,8 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
         if (isset($data[0])) {
                $this->view->assign($data[0]);
                $this->id = $data[0]['id'];
+        } else {
+            $this->insert = true;
         }
                     
         /*
@@ -62,7 +62,10 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
       
         $formData['uid'] = $this->uid;
         $formData['date'] = $this->date;
-        if ($this->id) {
+        if ($this->insert) {
+            DBUtil::insertObject($formData,'dbtdiary_diary' );
+            LogUtil::registerStatus("Entry Added.");
+        } else {
             $formData['id'] = $this->id;
 
             if (DBUtil::updateObject($formData, 'dbtdiary_diary' )) {
@@ -70,9 +73,6 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
             } else {
                 LogUtil::registerError("Error updating entry");
             }
-        } else {
-            DBUtil::insertObject($formData,'dbtdiary_diary' );
-            LogUtil::registerStatus("Entry Added.");
         }
     }
 
