@@ -1,8 +1,8 @@
 
-<h1>{gt text="DBT Diary for "}{$date|date_format}</h1>
 
-{* include file="dbtdiary_user_menu.tpl" *}
+{ include file="dbtdiary_user_menu.tpl" }
 
+<h3>{gt text="Diary for "}{$date|date_format}</h3>
 
 {insert name='getstatusmsg' module='DbtDiary'}
 
