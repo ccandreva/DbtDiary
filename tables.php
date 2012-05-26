@@ -17,38 +17,38 @@ function DbtDiary_tables()
    * This is the information on the main Diary Card, one table.
    * One record per day per user
    */
-  $tables['DbtDiary_Diary'] = DBUtil::getLimitedTablename('DbtDiary_Diary');
+  $tables['dbtdiary_diary'] = DBUtil::getLimitedTablename('dbtdiary_diary');
   
-  $tables['DbtDiary_Diary_column'] = array(
-    'id'	=> 'Diary_id',
-    'uid'      => 'Diary_uid',
-    'date'    => 'Diary_date',
-    'hurt'	=>	'Diary_hurt',
-    'good'	=>	'Diary_good',
-    'tense'	=>	'Diary_tense',
-    'miserable'	=>	'Diary_miserable',
-    'panic'	=>	'Diary_panic',
-    'overwhelmed'	=>	'Diary_overwhelmed',
-    'angry'	=>	'Diary_angry',
-    'sad'	=>	'Diary_sad',
-    'hopeful'	=>	'Diary_hopeful',
-    'alone'	=>	'Diary_alone',
-    'distracted'	=>	'Diary_distracted',
-    'bad'	=>	'Diary_bad',
-    'guilty'	=>	'Diary_guilty',
-    'unreal'	=>	'Diary_unreal',
-    'injure'	=>	'Diary_injure',
-    'kill'	=>	'Diary_kill',
-    'meds'	=>	'Diary_meds',
-    'skip'	=>	'Diary_skip',
-    'binge'	=>	'Diary_binge',
-    'purge'	=>	'Diary_purge',
-    'alcohol'	=>	'Diary_alcohol',
-    'drugs'	=>	'Diary_drugs',
-    'comments'  =>      'Diary_comments',
+  $tables['dbtdiary_diary_column'] = array(
+    'id'	=> 'diary_id',
+    'uid'      => 'diary_uid',
+    'date'    => 'diary_date',
+    'hurt'	=>	'diary_hurt',
+    'good'	=>	'diary_good',
+    'tense'	=>	'diary_tense',
+    'miserable'	=>	'diary_miserable',
+    'panic'	=>	'diary_panic',
+    'overwhelmed'	=>	'diary_overwhelmed',
+    'angry'	=>	'diary_angry',
+    'sad'	=>	'diary_sad',
+    'hopeful'	=>	'diary_hopeful',
+    'alone'	=>	'diary_alone',
+    'distracted'	=>	'diary_distracted',
+    'bad'	=>	'diary_bad',
+    'guilty'	=>	'diary_guilty',
+    'unreal'	=>	'diary_unreal',
+    'injure'	=>	'diary_injure',
+    'kill'	=>	'diary_kill',
+    'meds'	=>	'diary_meds',
+    'skip'	=>	'diary_skip',
+    'binge'	=>	'diary_binge',
+    'purge'	=>	'diary_purge',
+    'alcohol'	=>	'diary_alcohol',
+    'drugs'	=>	'diary_drugs',
+    'comments'  =>      'diary_comments',
   );
 
-  $tables['DbtDiary_Diary_column_def'] = array(
+  $tables['dbtdiary_diary_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL PRIMARY',
     'uid'     => 'I UNSIGNED NOTNULL',
     'date'    => 'T NOTNULL',
@@ -78,8 +78,8 @@ function DbtDiary_tables()
   );
 
   // add standard data fields
-  ObjectUtil::addStandardFieldsToTableDefinition ($tables['DbtDiary_Diary_column'], 'DbtDiary_Diary_');
-  ObjectUtil::addStandardFieldsToTableDataDefinition($tables['DbtDiary_Diary_column_def']);
+  ObjectUtil::addStandardFieldsToTableDefinition ($tables['dbtdiary_diary_column'], 'dbtdiary_diary_');
+  ObjectUtil::addStandardFieldsToTableDataDefinition($tables['dbtdiary_diary_column_def']);
 
     
   return $tables;
