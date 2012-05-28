@@ -17,13 +17,14 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
     public function main()
     {
 
-        $uid = UserUtil::getVar('uid');
-
         if (!SecurityUtil::checkPermission('DbtDiary::', '::', ACCESS_OVERVIEW)) {
             return LogUtil::registerPermissionError();
         }
 
-        return "<p>Hello, world</p>";
+        // $uid = UserUtil::getVar('uid');
+        $this->view->assign('templatetitle', 'DbtDiary');
+
+        return $this->view->fetch('dbtdiary_user_main.tpl');
     }
 
     public function EditDiaryEntry()
