@@ -42,26 +42,15 @@
         {foreach item=datum from=$data}
             <tr>
                 <th scope="row">{$datum.date|date_format:'%m-%d'}</th>
-                <td class="Nemotionlevel{$datum.hurt}">{$datum.hurt}</td>
-                <td class="Pemotionlevel{$datum.good}">{$datum.good}</td>
-                <td class="Nemotionlevel{$datum.tense}">{$datum.tense}</td>
-                <td class="Nemotionlevel{$datum.miserable}">{$datum.miserable}</td>
-                <td class="Nemotionlevel{$datum.panic}">{$datum.panic}</td>
-                <td class="Nemotionlevel{$datum.overwhelmed}">{$datum.overwhelmed}</td>
-                <td class="Nemotionlevel{$datum.angry}">{$datum.angry}</td>
-                <td class="Nemotionlevel{$datum.sad}">{$datum.sad}</td>
-                <td class="Pemotionlevel{$datum.hopeful}">{$datum.hopeful}</td>
-                <td class="Nemotionlevel{$datum.alone}">{$datum.alone}</td>
-                <td class="Nemotionlevel{$datum.distracted}">{$datum.distracted}</td>
-                <td class="Nemotionlevel{$datum.bad}">{$datum.bad}</td>
-                <td class="Nemotionlevel{$datum.guilty}">{$datum.guilty}</td>
-                <td class="Nemotionlevel{$datum.unreal}">{$datum.unreal}</td>
-            </tr>
+                {foreach item=emotion from=$emotions}
+                    <td class="{$emtype.$emotion}emotionlevel{$datum.$emotion}">{$datum.$emotion}</td>
+                    {if $datum.$emotion > 0}{assignel var='Was' key=$emotion value=1}{/if}
+                {/foreach}
+           </tr>
         {/foreach}
     </tbody>
 </table>
 
-    
     <table class="emotions" id='Urges'>
     <caption>Urges Felt</caption>
     <thead>
@@ -82,14 +71,9 @@
         {foreach item=datum from=$data}
             <tr>
                 <th scope="row">{$datum.date|date_format:'%m-%d'}</th>
-                <td class="Nemotionlevel{$datum.injure}">{$datum.injure}</td>
-                <td class="Nemotionlevel{$datum.kill}">{$datum.kill}</td>
-                <td class="Nemotionlevel{$datum.meds}">{$datum.meds}</td>
-                <td class="Nemotionlevel{$datum.skip}">{$datum.skip}</td>
-                <td class="Nemotionlevel{$datum.binge}">{$datum.binge}</td>
-                <td class="Nemotionlevel{$datum.purge}">{$datum.purge}</td>
-                <td class="Nemotionlevel{$datum.alcohol}">{$datum.alcohol}</td>
-                <td class="Nemotionlevel{$datum.drugs}">{$datum.drugs}</td>            </tr>
+                {foreach item=urge from=$urges}
+                    <td class="Nemotionlevel{$datum.$urge}">{$datum.$urge}</td>
+                {/foreach}
         {/foreach}
     </tbody>
 </table>
@@ -142,12 +126,12 @@ $(function () {
                 borderWidth: 0
             },
             series: [
-                {/literal}{foreach item=emotion from=$emotions}{literal}
+                {/literal}{foreach item=emotion from=$emotions}{if $Was.$emotion > 0}{literal}
                 {
                 name: '{/literal}{$emotion}{literal}',
                 data: [{/literal}{foreach item=datum from=$data}{$datum.$emotion},{/foreach}]{literal}
                 },
-                {/literal}{/foreach}{literal}]
+                {/literal}{/if}{/foreach}{literal}]
         });
     });
     
