@@ -14,11 +14,6 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
     
     /* Global variables here */
     var $date, $uid, $id, $insert, $sqldate;
-    var $emotions = array('hurt', 'good', 'tense', 'miserable', 'panic', 
-        'overwhelmed', 'angry', 'sad', 'hopeful', 'alone', 'distracted', 
-        'bad', 'guilty', 'unreal');
-    var $urges = array('injure', 'kill', 'meds', 'skip', 
-        'binge', 'purge', 'alcohol', 'drugs');
 
     /* Functions */
     public function __construct(&$args)
@@ -51,10 +46,10 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
       $gameObj = DBUtil::SelectObjectById('wiifriends_games', $this->gameID);
          */
       $this->view->assign('date',$this->date);
-      foreach ($this->emotions as $emotion)
+      foreach (DbtDiary_Util::getEmotions() as $emotion)
         $this->view->assign($emotion . 'Items', $emlist);
       $emlist[]=array('text' => 'Y', 'value'=>'10');
-      foreach ($this->urges as $urge)
+      foreach (DbtDiary_Util::getUrges() as $urge)
         $this->view->assign($urge . 'Items', $emlist);
       return true;
     }
