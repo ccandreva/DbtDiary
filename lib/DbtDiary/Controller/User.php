@@ -10,9 +10,6 @@
 
 class DbtDiary_Controller_User extends Zikula_AbstractController
 {
-    var $emotions = array('hurt', 'good', 'tense', 'miserable', 'panic', 
-        'overwhelmed', 'angry', 'sad', 'hopeful', 'alone', 'distracted', 
-        'bad', 'guilty', 'unreal');
 
     public function main()
     {
@@ -59,7 +56,6 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $data = DBUtil::selectObjectArray ('dbtdiary_diary',$where);
         $this->view->assign('templatetitle', 'DbtDiary :: View Diary');
         $this->view->assign('data', $data);
-        $this->view->assign('emotions', $this->emotions);
         return $this->view->fetch('dbtdiary_user_viewdiary.tpl');
     }
 }
