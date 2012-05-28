@@ -10,9 +10,6 @@
 
 class DbtDiary_Controller_User extends Zikula_AbstractController
 {
-    var $emotions = array('hurt', 'good', 'tense', 'miserable', 'panic', 
-        'overwhelmed', 'angry', 'sad', 'hopeful', 'alone', 'distracted', 
-        'bad', 'guilty', 'unreal');
 
     public function main()
     {
@@ -34,7 +31,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
             return LogUtil::registerPermissionError();
         }
         $uid = UserUtil::getVar('uid');
-        $GLOBALS['info']['title'] = 'DbtDiary :: Edit Entry';
+        $this->view->assign('templatetitle', 'DbtDiary :: Edit Diary');
         $date = FormUtil :: getPassedValue('date');
         $view = FormUtil::newForm('DbtDiary', $this);
         $view->assign('templatetitle', 'DbtDiary :: Edit Diary');
@@ -55,12 +52,24 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         }
 
         $uid = UserUtil::getVar('uid');
-        //$date = FormUtil :: getPassedValue('date');
+        $startnum = (int) FormUtil::getPassedValue('startnum', null, 'GET');
+        $numrows = 7;
+
         $where = "diary_uid=$uid";
-        $data = DBUtil::selectObjectArray ('dbtdiary_diary',$where);
+        $data = DBUtil::selectObjectArray ('dbtdiary_diary', $where, 
+                'date desc', $startnum, $numrows);
         $this->view->assign('templatetitle', 'DbtDiary :: View Diary');
         $this->view->assign('data', $data);
-        $this->view->assign('emotions', $this->emotions);
+        $this->view->assign('emotions', DbtDiary_Util::getEmotions());
+        $this->view->assign('emtype', DbtDiary_Util::getEmotionTypes());
+        $this->view->assign('urges', DbtDiary_Util::getUrges());
+        // Assign the values for the smarty plugin to produce a pager.
+        $this->view->assign('pager', array(
+            'numitems' => DBUtil::selectObjectCount('dbtdiary_diary', $where),
+            'itemsperpage' => $numrows,
+            )
+        );
+
         return $this->view->fetch('dbtdiary_user_viewdiary.tpl');
     }
 }
