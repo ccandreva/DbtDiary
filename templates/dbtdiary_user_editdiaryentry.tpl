@@ -2,7 +2,7 @@
 
 { include file="dbtdiary_user_menu.tpl" }
 
-<h3>{gt text="Diary for "}{$date|date_format}</h3>
+<h3>{gt text="Diary for "}{$date|date_format:'%a %b %e, %Y'}</h3>
 
 {insert name='getstatusmsg' module='DbtDiary'}
 
