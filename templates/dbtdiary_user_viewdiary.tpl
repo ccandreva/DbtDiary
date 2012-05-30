@@ -7,8 +7,8 @@
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
 {*ajaxheader modname='DbtDiary' filename='highcharts.js'*}
-{* pageaddvar name='javascript' value='jquery' *}
-{pageaddvar name='javascript' value='modules/DbtDiary/javascript/jquery.min.js'}
+{pageaddvar name='javascript' value='jquery'}
+{* Highcharts does client-side graphs in javascript *}
 {pageaddvar name='javascript' value='modules/DbtDiary/javascript/highcharts.js'}
 {pageaddvar name='javascript' value='modules/DbtDiary/javascript/exporting.js'}
 
@@ -82,9 +82,9 @@
 
 		<script type="text/javascript">
 
-$(function () {
+jQuery(function () {
     var chart;
-    $(document).ready(function() {
+    jQuery(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container',
