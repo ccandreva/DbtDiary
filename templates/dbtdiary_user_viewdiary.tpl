@@ -16,6 +16,8 @@
 
 <h3>Diary</h3>
 {nocache}
+{pager rowcount=$pager.numitems limit=$pager.itemsperpage maxpages='10' posvar='startnum'}
+
 <table class="emotions" id='Emotions'>
     <caption>Emotions Felt</caption>
     <thead>
@@ -41,7 +43,7 @@
     <tbody>
         {foreach item=datum from=$data}
             <tr>
-                <th scope="row">{$datum.date|date_format:'%m-%d'}</th>
+                <th scope="row">{$datum.date|date_format:'%a %m/%d'}</th>
                 {foreach item=emotion from=$emotions}
                     <td class="{$emtype.$emotion}emotionlevel{$datum.$emotion}">{$datum.$emotion}</td>
                     {if $datum.$emotion > 0}{assignel var='Was' key=$emotion value=1}{/if}
@@ -70,7 +72,7 @@
     <tbody>
         {foreach item=datum from=$data}
             <tr>
-                <th scope="row">{$datum.date|date_format:'%m-%d'}</th>
+                <th scope="row">{$datum.date|date_format:'%a %m/%d'}</th>
                 {foreach item=urge from=$urges}
                     <td class="Nemotionlevel{$datum.$urge}">{$datum.$urge}</td>
                 {/foreach}
@@ -99,7 +101,7 @@ $(function () {
                 x: -20
             },
             xAxis: {
-                categories: [{/literal}{foreach item=datum from=$data}'{$datum.date|date_format:'%m-%d'}',{/foreach}{literal}]
+                categories: [{/literal}{foreach item=datum from=$data}'{$datum.date|date_format:'%a %m/%d'}',{/foreach}{literal}]
             },
             yAxis: {
                 title: {
