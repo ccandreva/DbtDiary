@@ -11,6 +11,28 @@
 class DbtDiary_Util
 {
 
+    public function checkuser(&$uid, $access = ACCESS_READ)
+    {
+
+        // If not logged in, redirect to login screen
+        $uid = UserUtil::getVar('uid');
+	if ($uid <= 1)
+	{
+	    $url = ModUtil::url('users', 'user', 'loginscreen',
+		    array( 'returnpage' => urlencode(System::getCurrentUri()),
+			)
+	    );
+	    return System::redirect($url);
+	}
+
+        // Perform access check
+        if (!SecurityUtil::checkPermission('DbtDiary::', '::', $access)) {
+            return LogUtil::registerPermissionError();
+        }
+        
+        // Return false to signify everything is OK.
+        return false;
+    }
 
     
     public function initListValues($list, $firstnull = null)
@@ -18,8 +40,7 @@ class DbtDiary_Util
             $temp = array();
             if ($firstnull ) $temp[] = array('text' => '', 'value' => '');
             foreach ($list as $item) {
-                $v = preg_replace('/.reg;/', '', $item);
-                $temp[] = array('text' => $v, 'value' => $v);
+                $temp[] = array('text' => $item, 'value' => $item);
             }
             return $temp;
     }
@@ -30,6 +51,7 @@ class DbtDiary_Util
         'overwhelmed', 'angry', 'sad', 'hopeful', 'alone', 'distracted', 
         'bad', 'guilty', 'unreal');
     }
+
     public function getEmotionTypes()
     {
         return array(
@@ -48,15 +70,12 @@ class DbtDiary_Util
         'guilty' => 'N',
         'unreal' => 'N',
         );
-
-
     }
 
     public function getUrges()
     {
         return array('injure', 'kill', 'meds', 'skip', 
                      'binge', 'purge', 'alcohol', 'drugs');
-
     }
 
     

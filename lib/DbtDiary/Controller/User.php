@@ -13,12 +13,9 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
 
     public function main()
     {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
 
-        if (!SecurityUtil::checkPermission('DbtDiary::', '::', ACCESS_OVERVIEW)) {
-            return LogUtil::registerPermissionError();
-        }
-
-        // $uid = UserUtil::getVar('uid');
         $this->view->assign('templatetitle', 'DbtDiary');
 
         return $this->view->fetch('dbtdiary_user_main.tpl');
@@ -26,11 +23,9 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
 
     public function EditDiaryEntry()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission( 'DbtDiary::', "::", ACCESS_ADD)) {
-            return LogUtil::registerPermissionError();
-        }
-        $uid = UserUtil::getVar('uid');
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+
         $this->view->assign('templatetitle', 'DbtDiary :: Edit Diary');
         $date = FormUtil :: getPassedValue('date');
         $view = FormUtil::newForm('DbtDiary', $this);
@@ -46,12 +41,9 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
     
     public function ViewDiary()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission( 'DbtDiary::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
 
-        $uid = UserUtil::getVar('uid');
         $startnum = (int) FormUtil::getPassedValue('startnum', null, 'GET');
         $numrows = 7;
 
