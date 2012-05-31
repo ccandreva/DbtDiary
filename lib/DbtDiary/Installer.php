@@ -18,6 +18,9 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
         if ( !DBUtil::createTable('dbtdiary_diary') ) return false;
         DBUtil::createIndex('dbtdiary_diary_Iud', 'dbtdiary_diary', 
                 array('uid', 'date'));
+        if ( !DBUtil::createTable('dbtdiary_dailygoals') ) return false;
+        DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
+                array('uid', 'date'));
 
         return true;
     }
@@ -30,6 +33,8 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
             case "0.0.0" :
                 // if (!DBUtil::changeTable('dbtdiary_diary')) return false;
                 if (!DBUtil::createTable('dbtdiary_dailygoals')) return false;
+                DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
+                array('uid', 'date'));
                 
              // This break should be after the last upgrade
                 break;
