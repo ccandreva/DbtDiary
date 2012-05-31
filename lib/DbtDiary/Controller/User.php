@@ -64,4 +64,22 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
 
         return $this->view->fetch('dbtdiary_user_viewdiary.tpl');
     }
+    public function EditDailyGoal()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+
+        $this->view->assign('templatetitle', 'DbtDiary :: Edit Daily Goal');
+        $date = FormUtil :: getPassedValue('date');
+        $view = FormUtil::newForm('DbtDiary', $this);
+        $view->assign('templatetitle', 'DbtDiary :: Edit Diary');
+
+        $tmplfile = 'dbtdiary_user_editdailygoal.tpl';
+        $args = array('uid' => $uid);
+        if ($date) $args['date'] = $date;
+        $formobj = new DbtDiary_Form_Handler_EditDailyGoal($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+    }
+    
 }
