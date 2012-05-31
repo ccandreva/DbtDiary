@@ -43,7 +43,10 @@
     <tbody>
         {foreach item=datum from=$data}
             <tr>
-                <th scope="row">{$datum.date|date_format:'%a %m/%d'}</th>
+                <th scope="row">
+                    <a href="{modurl modname="dbtdiary" func="editdiaryentry" date=$datum.date}">
+                    {$datum.date|date_format:'%a %m/%d'}</a>
+                </th>
                 {foreach item=emotion from=$emotions}
                     <td class="{$emtype.$emotion}emotionlevel{$datum.$emotion}">{$datum.$emotion}</td>
                     {if $datum.$emotion > 0}{assignel var='Was' key=$emotion value=1}{/if}
