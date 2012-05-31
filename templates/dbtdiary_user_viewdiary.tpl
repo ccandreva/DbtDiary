@@ -81,10 +81,9 @@
 </table>
 
 		<script type="text/javascript">
-
-jQuery(function () {
+(function ($) {
     var chart;
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container',
@@ -131,13 +130,12 @@ jQuery(function () {
                 {/literal}{foreach item=emotion from=$emotions}{if $Was.$emotion > 0}{literal}
                 {
                 name: '{/literal}{$emotion}{literal}',
-                data: [{/literal}{foreach item=datum from=$data}{$datum.$emotion},{/foreach}]{literal}
+                data: [{/literal}{foreach item=datum from=$data}{$datum.$emotion|default:'0'},{/foreach}]{literal}
                 },
                 {/literal}{/if}{/foreach}{literal}]
         });
     });
-    
-});
+})(jQuery);
 		</script>
                 
 {/nocache}
