@@ -20,6 +20,8 @@ class DbtDiary_Api_User extends Zikula_AbstractApi
     {
         if (SecurityUtil::checkPermission('DbtDiary::', '::', ACCESS_READ)) {
             $links = array(
+              array('url' => ModUtil::url('DbtDiary', 'user', 'main'),
+                  text=>$this->__('Overview'), 'class' => 'z-icon-es-preview'),  
               array('url' => ModUtil::url('DbtDiary', 'user', 'viewdiary'),
                   text=>$this->__('View Diary'), 'class' => 'z-icon-es-view'),  
               array('url' => ModUtil::url('DbtDiary', 'user', 'editdiaryentry'),
