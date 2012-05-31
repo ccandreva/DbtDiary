@@ -24,16 +24,21 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
 
     public function upgrade($oldversion)
     {
-/*
+
         switch($oldversion) {
-            case "0.0" :
+
+            case "0.0.0" :
+                // if (!DBUtil::changeTable('dbtdiary_diary')) return false;
+                if (!DBUtil::createTable('dbtdiary_dailygoals')) return false;
+                
              // This break should be after the last upgrade
                 break;
+
             default:
                 SessionUtil::setVar('errormsg', __("An unknown version is installed!") );
                 return false;
         }
-*/
+
         return true;
     }
 

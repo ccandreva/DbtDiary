@@ -20,32 +20,32 @@ function DbtDiary_tables()
   $tables['dbtdiary_diary'] = DBUtil::getLimitedTablename('dbtdiary_diary');
   
   $tables['dbtdiary_diary_column'] = array(
-    'id'	=> 'diary_id',
-    'uid'      => 'diary_uid',
-    'date'    => 'diary_date',
-    'hurt'	=>	'diary_hurt',
-    'good'	=>	'diary_good',
-    'tense'	=>	'diary_tense',
-    'miserable'	=>	'diary_miserable',
-    'panic'	=>	'diary_panic',
-    'overwhelmed'	=>	'diary_overwhelmed',
-    'angry'	=>	'diary_angry',
-    'sad'	=>	'diary_sad',
-    'hopeful'	=>	'diary_hopeful',
-    'alone'	=>	'diary_alone',
-    'distracted'	=>	'diary_distracted',
-    'bad'	=>	'diary_bad',
-    'guilty'	=>	'diary_guilty',
-    'unreal'	=>	'diary_unreal',
-    'injure'	=>	'diary_injure',
-    'kill'	=>	'diary_kill',
-    'meds'	=>	'diary_meds',
-    'skip'	=>	'diary_skip',
-    'binge'	=>	'diary_binge',
-    'purge'	=>	'diary_purge',
-    'alcohol'	=>	'diary_alcohol',
-    'drugs'	=>	'diary_drugs',
-    'comments'  =>      'diary_comments',
+    'id'	=> 'id',
+    'uid'      => 'uid',
+    'date'    => 'date',
+    'hurt'	=>	'hurt',
+    'good'	=>	'good',
+    'tense'	=>	'tense',
+    'miserable'	=>	'miserable',
+    'panic'	=>	'panic',
+    'overwhelmed'	=>	'overwhelmed',
+    'angry'	=>	'angry',
+    'sad'	=>	'sad',
+    'hopeful'	=>	'hopeful',
+    'alone'	=>	'alone',
+    'distracted'	=>	'distracted',
+    'bad'	=>	'bad',
+    'guilty'	=>	'guilty',
+    'unreal'	=>	'unreal',
+    'injure'	=>	'injure',
+    'kill'	=>	'kill',
+    'meds'	=>	'meds',
+    'skip'	=>	'skip',
+    'binge'	=>	'binge',
+    'purge'	=>	'purge',
+    'alcohol'	=>	'alcohol',
+    'drugs'	=>	'drugs',
+    'comments'  =>      'comments',
   );
 
   $tables['dbtdiary_diary_column_def'] = array(
@@ -79,9 +79,33 @@ function DbtDiary_tables()
 
   // add standard data fields
   ObjectUtil::addStandardFieldsToTableDefinition (
-          $tables['dbtdiary_diary_column'], 'diary_');
+          $tables['dbtdiary_diary_column'], '');
   ObjectUtil::addStandardFieldsToTableDataDefinition(
           $tables['dbtdiary_diary_column_def']);
+
+  $tables['dbtdiary_dailygoals'] = 'dbtdiary_dailygoals';
+  
+  $tables['dbtdiary_dailygoals_column'] = array(
+    'id'	=> 'id',
+    'date'      => 'date',
+    'goal'      => 'goal',
+    'motivators' => 'motivators',
+    'barrriers'  => 'barriers',
+    'done'      => 'done',
+    );
+
+  $tables['dbtdiary_dailygoals_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'date'    => 'T NOTNULL',
+    'goal'  =>  'C(255)',
+    'motivators'  => 'C(255)',
+    'barrriers'  =>  'C(255)',
+    'done'      => 'L NULL'
+      );
+  ObjectUtil::addStandardFieldsToTableDefinition (
+          $tables['dbtdiary_dailygoals_column'], '');
+  ObjectUtil::addStandardFieldsToTableDataDefinition(
+          $tables['dbtdiary_dailygoals_column_def']);
 
     
   return $tables;
