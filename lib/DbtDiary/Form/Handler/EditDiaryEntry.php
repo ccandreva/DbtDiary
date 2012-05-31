@@ -33,7 +33,7 @@ class DbtDiary_Form_Handler_EditDiaryEntry extends Zikula_Form_AbstractHandler
     public function initialize(Zikula_Form_View $view)
     {
         $emlist = DbtDiary_Util::InitListValues(range(0,9));
-        $where = "diary_uid=$this->uid and diary_date='$this->sqldate'";
+        $where = "uid=$this->uid and date='$this->sqldate'";
         $data = DBUtil::selectObjectArray ('dbtdiary_diary',$where);
         if (isset($data[0])) {
                $this->view->assign($data[0]);

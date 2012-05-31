@@ -47,7 +47,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $startnum = (int) FormUtil::getPassedValue('startnum', null, 'GET');
         $numrows = 7;
 
-        $where = "diary_uid=$uid";
+        $where = "uid=$uid";
         $data = DBUtil::selectObjectArray ('dbtdiary_diary', $where, 
                 'date desc', $startnum, $numrows);
         $this->view->assign('templatetitle', 'DbtDiary :: View Diary');
