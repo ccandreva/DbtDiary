@@ -107,6 +107,41 @@ function DbtDiary_tables()
   ObjectUtil::addStandardFieldsToTableDataDefinition(
           $tables['dbtdiary_dailygoals_column_def']);
 
+
+  $tables['dbtdiary_modules'] = 'dbtdiary_modules';
+  $tables['dbtdiary_modules_column'] = array(
+    'id'	=> 'id',
+    'name'      => 'name',
+    );
+
+  $tables['dbtdiary_modules_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'name'    => 'C(30)',
+    );
+
+  $tables['dbtdiary_headings'] = 'dbtdiary_headings';
+  $tables['dbtdiary_headings_column'] = array(
+    'id'	=> 'id',
+    'name'      => 'name',
+    );
+
+  $tables['dbtdiary_headings_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'name'    => 'C(50)',
+    );
+  
+  $tables['dbtdiary_skills'] = 'dbtdiary_skills';
+  $tables['dbtdiary_skills_column'] = array(
+    'id'	=> 'id',
+    'name'      => 'name',
+    'htname'  => 'formatedname',
+    );
+
+  $tables['dbtdiary_skills_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'name'    => 'C(60)',
+    'htname'    => 'C(60)',
+    );
     
   return $tables;
 
