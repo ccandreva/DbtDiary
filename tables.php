@@ -110,8 +110,8 @@ function DbtDiary_tables()
 
   $tables['dbtdiary_modules'] = 'dbtdiary_modules';
   $tables['dbtdiary_modules_column'] = array(
-    'id'	=> 'id',
-    'name'      => 'name',
+    'id'	=> 'modules_id',
+    'name'      => 'modules_name',
     );
 
   $tables['dbtdiary_modules_column_def'] = array(
@@ -121,9 +121,9 @@ function DbtDiary_tables()
 
   $tables['dbtdiary_headings'] = 'dbtdiary_headings';
   $tables['dbtdiary_headings_column'] = array(
-    'id'	=> 'id',
-    'name'      => 'name',
-    'module'    => 'module',
+    'id'	=> 'headings_id',
+    'name'      => 'headings_name',
+    'module'    => 'headings_module',
     );
 
   $tables['dbtdiary_headings_column_def'] = array(
@@ -134,10 +134,10 @@ function DbtDiary_tables()
   
   $tables['dbtdiary_skills'] = 'dbtdiary_skills';
   $tables['dbtdiary_skills_column'] = array(
-    'id'	=> 'id',
-    'name'      => 'name',
-    'htname'  => 'htname',
-    'heading' => 'heading',
+    'id'	=> 'skills_id',
+    'name'      => 'skills_name',
+    'htname'  => 'skills_htname',
+    'heading' => 'skills_heading',
     );
 
   $tables['dbtdiary_skills_column_def'] = array(
