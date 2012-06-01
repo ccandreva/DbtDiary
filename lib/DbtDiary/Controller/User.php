@@ -81,5 +81,5 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $output = $view->execute($tmplfile, $formobj);
         return $output;
     }
-    
+
 }

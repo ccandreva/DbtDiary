@@ -123,24 +123,28 @@ function DbtDiary_tables()
   $tables['dbtdiary_headings_column'] = array(
     'id'	=> 'id',
     'name'      => 'name',
+    'module'    => 'module',
     );
 
   $tables['dbtdiary_headings_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'name'    => 'C(50)',
+    'module'  => 'I UNSIGNED NOTNULL',
     );
   
   $tables['dbtdiary_skills'] = 'dbtdiary_skills';
   $tables['dbtdiary_skills_column'] = array(
     'id'	=> 'id',
     'name'      => 'name',
-    'htname'  => 'formatedname',
+    'htname'  => 'htname',
+    'heading' => 'heading',
     );
 
   $tables['dbtdiary_skills_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'name'    => 'C(60)',
     'htname'    => 'C(60)',
+    'heading'   => 'I UNSIGNED NOTNULL',
     );
     
   return $tables;
