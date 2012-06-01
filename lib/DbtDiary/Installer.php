@@ -37,7 +37,7 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
                 DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
                 array('uid', 'date'));
 
-            case "0.0.3" :
+            case "0.0.5" :
                 $this->LoadSkills();
 
              // This break should be after the last upgrade
@@ -72,6 +72,9 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
         $mID=0;
         $hID=0;
 
+        DBUtil::dropTable('dbtdiary_modules');
+        DBUtil::dropTable('dbtdiary_headings');
+        DBUtil::dropTable('dbtdiary_skills');
         DBUtil::createTable('dbtdiary_modules');
         DBUtil::createTable('dbtdiary_headings');
         DBUtil::createTable('dbtdiary_skills');
@@ -82,7 +85,7 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
             list($mod, $head, $skill) = explode(',', $rec);
             
             $htskill = preg_replace('/~(\w)/', '<strong>$1</strong>', $skill);
-            $skill = preg_replace('/<[^>]+>/', '', $skill);
+            $skill = preg_replace('/<[^>]+>|~/', '', $skill);
             
             
             if ($mod) {
