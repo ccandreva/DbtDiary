@@ -37,7 +37,7 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
                 DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
                 array('uid', 'date'));
 
-            case "0.0.5" :
+            case "0.0.8" :
                 $this->LoadSkills();
 
              // This break should be after the last upgrade

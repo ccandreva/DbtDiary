@@ -17,14 +17,16 @@
 <div id="accordion">
     {foreach item=module from=$modules}
 	<h3><a href="#">{$module.name}</a></h3>
-        <div>
-            {assign var=heading value=''}
-            {foreach item=skill from=$module.skills}
-                {if $skill.heading ne $heading}
-                    {assign var=heading value=$skill.heading}
-                    <h3>{$skill.heading}</h3>
-                {/if}
-                {$skill.htname}<br />
+        <div class="{$module.name|strip:''}">
+            {foreach item=head from=$module.headings}
+                <div class="skills {$head.name|strip:''}">
+                    <h3 class="skills">{$head.name}</h3>
+                    <ul>
+                    {foreach item=skill from=$head.skills}
+                        <li class="skills">{$skill.htname}</li>
+                    {/foreach}
+                    </ul>
+                </div>
             {/foreach}
         </div>
     {/foreach}

@@ -90,8 +90,24 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
 
         $this->view->assign('templatetitle', 'DbtDiary :: Skils Test');
         
-        $modules = DBUtil::selectObjectArray ('dbtdiary_modules');
-        
+        $modules = DBUtil::selectObjectArray ('dbtdiary_modules','','name');
+        foreach ($modules as &$mod)
+        {
+            $id = $mod['id'];
+            $where = "headings_module=$id";
+            $mod['headings'] = DBUtil::selectObjectArray ('dbtdiary_headings', $where);
+            $headings = &$mod['headings'];
+            
+            foreach ($headings as &$head)
+            {
+                $id = $head['id'];
+                $where = "skills_heading=$id";
+                $head['skills'] = DBUtil::selectObjectArray ('dbtdiary_skills', $where);
+            }
+        } 
+        $this->view->assign('modules', $modules);
+        return $this->view->fetch('dbtdiary_user_showskills.tpl');
+/*        
         $j1 = array ( 'join_table' => 'dbtdiary_headings',
             'join_field' => array('name', 'module'),
             'object_field_name' => array('heading', 'module'),
@@ -107,6 +123,6 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         } 
         $this->view->assign('modules', $modules);
         return $this->view->fetch('dbtdiary_user_showskills.tpl');
-        
+  */      
     }
 }

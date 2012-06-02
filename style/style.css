@@ -32,91 +32,98 @@ table.emotions td
     text-align :center;
 }
 
-.Nemotionlevel9
+div.skills
 {
-  color: #FF0000;
+    float: left;
+    margin: 0 20px 0 0;
+    width: 15em;
 }
+#content ul
+{
+    /* margin: 0; */
+}
+#content li.skills
+{
+    padding: 0;
+    margin: 0;
+    list-style-image: url(/images/icons/extrasmall/edit_add.png);
+    line-height: 1.8;
+}
+#content li.skills:hover
+{
+    background-color: lightsteelblue;
+     -moz-border-radius: 3px;
+}
+
+div.EmotionRegulation .skills
+{
+    width: 18em;
+}
+div.EmotionRegulation div.skills.PLEASEMaster
+{
+    width: 15em;
+}
+div.Mindfullness .skills
+{
+    width: 10em;
+}
+div.skills.InterpersonalSkills
+{
+    width: auto;
+}
+h3.skills
+{
+    margin: 0 0 6px 0;
+    line-height: 1.1;
+}
+
+/* Level classes */
+.Nemotionlevel9,
 .Pemotionlevel0
 {
   color: #FF0000;
 }
-
-.Nemotionlevel8
-{
-  color: #FF4400;
-}
+.Nemotionlevel8,
 .Pemotionlevel1
 {
   color: #FF4400;
 }
-
-.Nemotionlevel7
-{
-  color: #FF8800;
-}
+.Nemotionlevel7,
 .Pemotionlevel2
 {
   color: #FF8800;
 }
-
-.Nemotionlevel6
-{
-  color: #FFCC00;
-}
+.Nemotionlevel6,
 .Pemotionlevel3
 {
   color: #FFCC00;
 }
-
-.Nemotionlevel5
-{
-  color: #FFFF00;
-}
+.Nemotionlevel5,
 .Pemotionlevel4
 {
   color: #FFFF00;
 }
-
-.Nemotionlevel4
-{
-  color: #CCFF00;
-}
+.Nemotionlevel4,
 .Pemotionlevel5
 {
   color: #CCFF00;
 }
-
-.Nemotionlevel3
-{
-  color: #99FF00;
-}
+.Nemotionlevel3,
 .Pemotionlevel6
 {
   color: #99FF00;
 }
-
-.Nemotionlevel2
-{
-  color: #66FF00;
-}
+.Nemotionlevel2,
 .Pemotionlevel7
 {
   color: #66FF00;
 }
-
-.Nemotionlevel1
-{
-  color: #33FF00;
-}
+.Nemotionlevel1,
 .Pemotionlevel8
 {
   color: #33FF00;
 }
-
-.Nemotionlevel0
-{
-  color: #00FF00;
-}
+.Nemotionlevel0,
 .Pemotionlevel9
 {
   color: #00FF00;
