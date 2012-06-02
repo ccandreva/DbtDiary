@@ -107,22 +107,5 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         } 
         $this->view->assign('modules', $modules);
         return $this->view->fetch('dbtdiary_user_showskills.tpl');
-/*        
-        $j1 = array ( 'join_table' => 'dbtdiary_headings',
-            'join_field' => array('name', 'module'),
-            'object_field_name' => array('heading', 'module'),
-            'compare_field_table' => 'heading',
-            'compare_field_join' => 'id'
-        );
-        $joinInfo = array($j1);
-        foreach ($modules as &$mod)
-        {
-            $id = $mod['id'];
-            $where = "headings_module=$id";
-            $mod['skills'] = DBUtil::selectExpandedObjectArray ('dbtdiary_skills', $joinInfo, $where);
-        } 
-        $this->view->assign('modules', $modules);
-        return $this->view->fetch('dbtdiary_user_showskills.tpl');
-  */      
     }
 }
