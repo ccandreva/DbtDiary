@@ -33,8 +33,19 @@
 </div>
 
 <script type="text/javascript">
+    // Wrapper for jQuery namespace.
     (function($) {
-	$( "#accordion" ).accordion({ autoHeight: false });
-        $("li").click(function(){alert($(this).attr('id')); $(this).unbind();});
+	
+	// Initializers, to be run on document ready.
+	$(document).ready(function() {
+	    $( "#accordion" ).accordion({ autoHeight: false });
+	    $("li").click(skillHander);
+	});
+
+	// Handler functions go here.
+	function skillHander(event) {
+	    alert($(this).attr('id'));
+	    $(this).unbind();
+	}
     }(jQuery) );
 </script>
