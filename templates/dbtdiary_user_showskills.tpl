@@ -6,7 +6,7 @@
 * @license See license.txt
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
-
+{pageaddvar name="stylesheet" value="/javascript/jquery-ui/themes/cupertino/jquery-ui.css"}
 {pageaddvar name='javascript' value='jquery' }
 {pageaddvar name='javascript' value='jquery-ui' }
 
@@ -18,7 +18,12 @@
     {foreach item=module from=$modules}
 	<h3><a href="#">{$module.name}</a></h3>
         <div>
+            {assign var=heading value=''}
             {foreach item=skill from=$module.skills}
+                {if $skill.heading ne $heading}
+                    {assign var=heading value=$skill.heading}
+                    <h3>{$skill.heading}</h3>
+                {/if}
                 {$skill.htname}<br />
             {/foreach}
         </div>
