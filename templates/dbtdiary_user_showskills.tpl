@@ -23,7 +23,7 @@
                     <h3 class="skills">{$head.name}</h3>
                     <ul>
                     {foreach item=skill from=$head.skills}
-                        <li class="skills">{$skill.htname}</li>
+                        <li class="skills" id="skill{$skill.id}">{$skill.htname}</li>
                     {/foreach}
                     </ul>
                 </div>
@@ -35,7 +35,6 @@
 <script type="text/javascript">
     (function($) {
 	$( "#accordion" ).accordion({ autoHeight: false });
+        $("li").click(function(){alert($(this).attr('id')); $(this).unbind();});
     }(jQuery) );
 </script>
-
-
