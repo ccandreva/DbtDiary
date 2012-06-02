@@ -113,7 +113,6 @@ function DbtDiary_tables()
     'id'	=> 'modules_id',
     'name'      => 'modules_name',
     );
-
   $tables['dbtdiary_modules_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'name'    => 'C(30)',
@@ -125,7 +124,6 @@ function DbtDiary_tables()
     'name'      => 'headings_name',
     'module'    => 'headings_module',
     );
-
   $tables['dbtdiary_headings_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'name'    => 'C(50)',
@@ -139,12 +137,25 @@ function DbtDiary_tables()
     'htname'  => 'skills_htname',
     'heading' => 'skills_heading',
     );
-
   $tables['dbtdiary_skills_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'name'    => 'C(60)',
     'htname'    => 'C(60)',
     'heading'   => 'I UNSIGNED NOTNULL',
+    );
+    
+  $tables['dbtdiary_skillsused'] = 'dbtdiary_skillsused';
+  $tables['dbtdiary_skillsused_column'] = array(
+    'id'	=> 'skillsused_id',
+    'uid'	=> 'skillsused_uid',
+    'date'      => 'skillsused_date',
+    'skill'	=> 'skillsused_skill',
+    );
+  $tables['dbtdiary_skillsused_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'	=> 'I UNSIGNED',
+    'date'    => 'T NOTNULL',
+    'skill'	=> 'I UNSIGNED',
     );
     
   return $tables;

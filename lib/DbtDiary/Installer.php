@@ -22,6 +22,9 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
         DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
                 array('uid', 'date'));
         $this->LoadSkills();
+        if (!DBUtil::createTable('dbtdiary_skillsused')) return false;
+        DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
+            array('uid', 'date', 'skill'), array('UNIQUE' => true));
 
         return true;
     }
@@ -39,6 +42,12 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
 
             case "0.0.8" :
                 $this->LoadSkills();
+
+            case "0.0.10" :
+                if (!DBUtil::createTable('dbtdiary_skillsused')) return false;
+                DBUtil::createIndex('UidDateSkill', 'dbtdiary_skillsused', 
+                    array('uid', 'date', 'skill'),
+                    array('UNIQUE' => true) );
 
              // This break should be after the last upgrade
                 break;
