@@ -12,15 +12,18 @@
 
     // Initializers, to be run on document ready.
     $(document).ready(function() {
+        //$('img#skillWaiting').hide();
         $( "#accordion" ).accordion({ autoHeight: false });
         $("li").click(skillHander);
+        skillHide(initialSkills);
     });
 
     // Handler functions go here.
     function skillHander() {
         //alert($(this).attr('id'));
         //$(this).unbind();
-        $('#SkillsUsed > h3').html('Loading . . .');
+        //$('th#skillshead').html('Loading . . .');
+        $('img#skillWaiting').show();
         $.getJSON('/ajax.php',{
             module: 'DbtDiary', func: 'addskill',
             skill: $(this).attr('id')
@@ -28,7 +31,14 @@
     }
     
     function skillCallback(data){
+        $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
-
+        $('#'+data.data.id).hide('slow');
+    }
+    
+    function skillHide(skills){
+        for (var i in skills) {
+            $('#skill' + skills[i]).hide();
+        }
     }
 }(jQuery) );

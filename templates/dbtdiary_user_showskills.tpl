@@ -10,6 +10,13 @@
 {pageaddvar name='javascript' value='jquery' }
 {pageaddvar name='javascript' value='jquery-ui' }
 {pageaddvar name='javascript' value='modules/DbtDiary/javascript/dbtdiary_user_showskills.js'}
+{* Set up some initial javascript values *}
+<script type="text/javascript">
+{/literal}
+    var date='{$date}';
+    var initialSkills=[{foreach item=skill from=$skills}'{$skill.skill_id}', {/foreach}];
+{literal}
+</script>
 
 { include file="dbtdiary_user_menu.tpl" }
 

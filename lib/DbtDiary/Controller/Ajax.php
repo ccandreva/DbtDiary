@@ -39,7 +39,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
 
         $response = array(
             'output' => $output,
-            'id'    => "Skill$sid",
+            'id'    => "skill$sid",
         );
         return new Zikula_Response_Ajax($response);
    }

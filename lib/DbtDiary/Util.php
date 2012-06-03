@@ -38,8 +38,8 @@ class DbtDiary_Util
     {
         $joinInfo = array(
             array ( 'join_table' => 'dbtdiary_skills',
-                'join_field' => array('name'),
-                'object_field_name' => array('name'),
+                'join_field' => array('name','id'),
+                'object_field_name' => array('name','skill_id'),
                 'compare_field_table' => 'skill',
                 'compare_field_join' => 'id'
             ),
