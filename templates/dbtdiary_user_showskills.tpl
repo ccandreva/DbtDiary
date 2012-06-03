@@ -6,13 +6,17 @@
 * @license See license.txt
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
-{pageaddvar name="stylesheet" value="/javascript/jquery-ui/themes/cupertino/jquery-ui.css"}
+{pageaddvar name="stylesheet" value="javascript/jquery-ui/themes/cupertino/jquery-ui.css"}
 {pageaddvar name='javascript' value='jquery' }
 {pageaddvar name='javascript' value='jquery-ui' }
+{pageaddvar name='javascript' value='modules/DbtDiary/javascript/dbtdiary_user_showskills.js'}
 
 { include file="dbtdiary_user_menu.tpl" }
 
-<h3>Skills</h3>
+
+<div id="SkillsUsed">
+    {include file='dbtdiary_skillsused.tpl'}
+</div>
 
 <div id="accordion">
     {foreach item=module from=$modules}
@@ -31,21 +35,3 @@
         </div>
     {/foreach}
 </div>
-
-<script type="text/javascript">
-    // Wrapper for jQuery namespace.
-    (function($) {
-	
-	// Initializers, to be run on document ready.
-	$(document).ready(function() {
-	    $( "#accordion" ).accordion({ autoHeight: false });
-	    $("li").click(skillHander);
-	});
-
-	// Handler functions go here.
-	function skillHander(event) {
-	    alert($(this).attr('id'));
-	    $(this).unbind();
-	}
-    }(jQuery) );
-</script>

@@ -34,6 +34,36 @@ class DbtDiary_Util
         return false;
     }
 
+    public function getSkillsUsed($uid, $date)
+    {
+        $joinInfo = array(
+            array ( 'join_table' => 'dbtdiary_skills',
+                'join_field' => array('name'),
+                'object_field_name' => array('name'),
+                'compare_field_table' => 'skill',
+                'compare_field_join' => 'id'
+            ),
+            array ( 'join_table' => 'dbtdiary_headings',
+                'join_field' => array('name'),
+                'object_field_name' => array('heading'),
+                'compare_field_table' => 'skills_heading',
+                'compare_field_join' => 'id'
+            ),
+            array ( 'join_table' => 'dbtdiary_modules',
+                'join_field' => array('name'),
+                'object_field_name' => array('module'),
+                'compare_field_table' => 'headings_module',
+                'compare_field_join' => 'id'
+            ),
+        );
+        
+        $where = "skillsused_uid=$uid and skillsused_date='$date'";
+        $skillsObj = DBUtil::selectExpandedObjectArray ('dbtdiary_skillsused',
+                $joinInfo, $where, 'skill');
+        return $skillsObj;
+
+
+    }
     
     public function initListValues($list, $firstnull = null)
     {

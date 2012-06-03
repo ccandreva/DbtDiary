@@ -87,8 +87,11 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
     {
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
         if ($ret) return $ret;
+        
+        $date = '2012-06-02';
 
         $this->view->assign('templatetitle', 'DbtDiary :: Skils Test');
+        $this->view->assign('date', $date);
         
         $modules = DBUtil::selectObjectArray ('dbtdiary_modules','','name');
         foreach ($modules as &$mod)
@@ -105,7 +108,9 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
                 $head['skills'] = DBUtil::selectObjectArray ('dbtdiary_skills', $where);
             }
         } 
+
         $this->view->assign('modules', $modules);
+        $this->view->assign('skills', DbtDiary_Util::getSkillsUsed($uid, $date));
         return $this->view->fetch('dbtdiary_user_showskills.tpl');
     }
 }

@@ -77,6 +77,16 @@ h3.skills
     line-height: 1.1;
 }
 
+table#SkillsUsed
+{
+    width: 100%;
+}
+table#SkillsUsed td
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 /* Level classes */
 .Nemotionlevel9,
 .Pemotionlevel0
