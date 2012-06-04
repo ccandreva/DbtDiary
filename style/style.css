@@ -32,6 +32,11 @@ table.emotions td
     text-align :center;
 }
 
+table.comments td
+{
+    vertical-align: top;
+}
+
 div.skills
 {
     float: left;

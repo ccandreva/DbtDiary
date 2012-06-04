@@ -18,6 +18,28 @@
 {nocache}
 {pager rowcount=$pager.numitems limit=$pager.itemsperpage maxpages='10' posvar='startnum'}
 
+<table class="comments">
+    <caption>Comments</caption>
+    <thead>
+        <tr>
+            {foreach item=datum from=$data}
+                <th scope="row">
+                    <a href="{modurl modname="dbtdiary" func="editdiaryentry" date=$datum.date}">
+                    {$datum.date|date_format:'%a %m/%d'}</a>
+                </th>
+            {/foreach}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {foreach item=datum from=$data}
+                <td>{$datum.comments}</td>
+            {/foreach}
+        </tr>
+    </tbody>
+    
+</table>
+
 <table class="emotions" id='Emotions'>
     <caption>Emotions Felt</caption>
     <thead>
