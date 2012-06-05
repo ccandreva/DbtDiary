@@ -26,6 +26,7 @@
         $('img#skillWaiting').show();
         $.getJSON('/ajax.php',{
             module: 'DbtDiary', func: 'addskill',
+            date: date,
             skill: $(this).attr('id')
         }, skillCallback);
     }
