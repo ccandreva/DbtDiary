@@ -16,8 +16,40 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
         if ($ret) return $ret;
 
-        $this->view->assign('templatetitle', 'DbtDiary');
+        DbtDiary_Util::getWeek($start, $end);
+        $startSQL = "$start 00:00:00";
+        $endSQL = "$end 00:00:00";
+        $today = date('Y-m-d');
+        
+        $where = "uid=$uid"; // and date>='$startSQL' and date <='$endSQL'";
+        $diaryObj = DBUtil::selectObjectArray ('dbtdiary_diary', $where,
+            '',-1, -1, 'date', null, null, array('id','date'));
+        $where = "skillsused_uid=$uid"; // and skillsused_date>='$startSQL' and skillsused_date <='$endSQL'";
+        $skillsObj = DBUtil::selectObjectArray ('dbtdiary_skillsused', $where,
+            '',-1, -1, 'date', null, null, array('id', 'date'), 'y');
 
+        $weeks = array();
+        $t1 = strtotime($start);
+        $t2 = $t1 - (86400 * 7);
+        foreach ( array($t1, $t2) as $t) {
+            $data = array();
+            for ($i = 1; $i<=7; $i++) {
+                $date = date('Y-m-d', $t);
+                $dateSQL = "$date 00:00:00";
+                $t+=86400; // add 24 hours
+                $data[$date]['date'] = $date;
+                if ($diaryObj[$dateSQL]) $data[$date]['diary'] = 'y';
+                if ($skillsObj[$dateSQL]) $data[$date]['skills'] = 'y';
+                if ($date <= $today) $data[$date]['canedit'] = true;
+            }
+            $weeks[] = array('start' => date('Y-m-d', $t), 'data' => $data );
+        }
+
+        $this->view->assign('start', $start);
+        $this->view->assign('end', $end);
+        $this->view->assign('today', $today);
+        $this->view->assign('weeks', $weeks);
+        $this->view->assign('templatetitle', 'DbtDiary');
         return $this->view->fetch('dbtdiary_user_main.tpl');
     }
 
@@ -88,7 +120,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
         if ($ret) return $ret;
         
-        $date = '2012-06-02';
+        $date = FormUtil :: getPassedValue('date',date('Y-m-d') );
 
         $this->view->assign('templatetitle', 'DbtDiary :: Skils Test');
         $this->view->assign('date', $date);
