@@ -19,7 +19,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         $skill = $this->request->query->get('skill');
         $sid = preg_replace('/[^0-9]+/','',$skill);
         
-        $date = '2012-06-02';
+        $date = $this->request->query->get('date');
         $sqldate = "$date 00:00:00";
         
         // Validate skill sent back in, make sure it is real.
