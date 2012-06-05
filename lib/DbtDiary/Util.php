@@ -65,6 +65,12 @@ class DbtDiary_Util
 
     }
     
+    public function getWeek(&$start, &$end)
+    {
+        $start = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d')-date('w')+1, date('Y')));
+        $end = date('Y-m-d', strtotime("+6 days", strtotime($start)));
+    }
+    
     public function initListValues($list, $firstnull = null)
     {
             $temp = array();
