@@ -84,6 +84,7 @@ class DbtDiary_Form_Handler_EditDailyGoal extends Zikula_Form_AbstractHandler
                 LogUtil::registerError("Error updating entry");
             }
         }
+        return $this->view->redirect (ModUtil::url('DbtDiary', 'user','main'));
     }
 
     

@@ -47,6 +47,11 @@
 
     </fieldset>
 
-{formbutton commandName="submit" __text="Submit" }
+    <div class="z-buttons z-formbuttons">
+        {* button imageUrl='/images/icons/extrasmall/button_ok.png' __alt="Save" __title="Save" __text="Save" *}
+        {formbutton commandName="Save" __text="Save" }
+        {*button src='button_ok.png' set='icons/extrasmall' __alt="Save" __title="Save" __text="Save" *}
+        <a href="{modurl modname='DbtDiary' type='user' func='main'}" title="{gt text="Cancel"}">{img modname=core src=button_cancel.png set=icons/extrasmall __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
+    </div>
 {/form}
 {/nocache}

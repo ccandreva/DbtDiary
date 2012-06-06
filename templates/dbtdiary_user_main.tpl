@@ -60,6 +60,17 @@
                     </td>
                 {/foreach}
             </tr>
+            <tr>
+                <th>Daily Goals</th>
+                {foreach item=datum from=$data}
+                    <td>
+                        {if $datum.dailygoals}{$Done.imgtag}{else}{$ToDo.imgtag}{/if}
+                        {if $datum.canedit}
+                            <a href="{modurl modname="dbtdiary" func="EditDailyGoal" date=$datum.date}">{$editIcon.imgtag}</a>
+                        {/if}
+                    </td>
+                {/foreach}
+            </tr>
         </tbody>
     </table>
 

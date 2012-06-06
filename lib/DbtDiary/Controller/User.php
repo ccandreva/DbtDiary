@@ -24,6 +24,8 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $where = "uid=$uid"; // and date>='$startSQL' and date <='$endSQL'";
         $diaryObj = DBUtil::selectObjectArray ('dbtdiary_diary', $where,
             '',-1, -1, 'date', null, null, array('id','date'));
+        $dailygoalsObj = DBUtil::selectObjectArray ('dbtdiary_dailygoals', $where,
+            '',-1, -1, 'date', null, null, array('id','date'));
         $where = "skillsused_uid=$uid"; // and skillsused_date>='$startSQL' and skillsused_date <='$endSQL'";
         $skillsObj = DBUtil::selectObjectArray ('dbtdiary_skillsused', $where,
             '',-1, -1, 'date', null, null, array('id', 'date'), 'y');
@@ -39,6 +41,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
                 $t+=86400; // add 24 hours
                 $data[$date]['date'] = $date;
                 if ($diaryObj[$dateSQL]) $data[$date]['diary'] = 'y';
+                if ($dailygoalsObj[$dateSQL]) $data[$date]['dailygoals'] = 'y';
                 if ($skillsObj[$dateSQL]) $data[$date]['skills'] = 'y';
                 if ($date <= $today) $data[$date]['canedit'] = true;
             }
