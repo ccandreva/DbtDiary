@@ -6,17 +6,21 @@
 * @license See license.txt
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
-{*ajaxheader modname='DbtDiary' filename='highcharts.js'*}
-{* pageaddvar name='javascript' value='jquery' *}
-{*pageaddvar name='javascript' value='modules/DbtDiary/javascript/jquery.min.js'}
-{pageaddvar name='javascript' value='modules/DbtDiary/javascript/highcharts.js'}
-{pageaddvar name='javascript' value='modules/DbtDiary/javascript/exporting.js' *}
+{pageaddvar name='javascript' value='jquery'}
+{pageaddvar name='javascript' value='jquery-ui'}
+{pageaddvar name='javascript' value='modules/DbtDiary/javascript/dbtdiary_user_main.js'}
+{pageaddvar name="stylesheet" value="javascript/jquery-ui/themes/cupertino/jquery-ui.css"}
 {img modname='core' src='button_ok.png' set='icons/extrasmall' alt='Completed' assign='Done'}
 {img modname='DbtDiary' src='button_ok_check.png'  alt='To Do' assign='ToDo'}
 {img modname='core' src='xedit.png' set='icons/extrasmall' alt='Edit' assign='editIcon'}
 {*img modname='DbtDiary' src='xedit-gray.png'  alt='' assign='noeditIcon' *}
 
 { include file="dbtdiary_user_menu.tpl" }
+
+<p><strong>Edit Diary for Date: </strong>
+<input type="text" id="pickdate" maxlength="8" style="width:4em;">
+</p>
+
 
 {*<h3>Diary</h3> *}
 
