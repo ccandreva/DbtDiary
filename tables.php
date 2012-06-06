@@ -87,6 +87,7 @@ function DbtDiary_tables()
   
   $tables['dbtdiary_dailygoals_column'] = array(
     'id'	=> 'id',
+    'uid'      => 'uid',
     'date'      => 'date',
     'goal'      => 'goal',
     'motivators' => 'motivators',
@@ -96,6 +97,7 @@ function DbtDiary_tables()
 
   $tables['dbtdiary_dailygoals_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'     => 'I UNSIGNED NOTNULL',
     'date'    => 'T NOTNULL',
     'goal'  =>  'C(255)',
     'motivators'  => 'C(255)',

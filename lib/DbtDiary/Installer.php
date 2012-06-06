@@ -23,7 +23,7 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
                 array('uid', 'date'));
         $this->LoadSkills();
         if (!DBUtil::createTable('dbtdiary_skillsused')) return false;
-        DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
+        DBUtil::createIndex('UidDate', 'dbtdiary_skillsused', 
             array('uid', 'date', 'skill'), array('UNIQUE' => true));
 
         return true;
