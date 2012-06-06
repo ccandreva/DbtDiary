@@ -17,7 +17,7 @@
 <h3>Diary</h3>
 {nocache}
 {pager rowcount=$pager.numitems limit=$pager.itemsperpage maxpages='10' posvar='startnum'}
-
+{assign var=data value=$data|@array_reverse}
 <table class="comments">
     <caption>Comments</caption>
     <thead>
