@@ -6,7 +6,6 @@
 * @license See license.txt
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
-{*ajaxheader modname='DbtDiary' filename='highcharts.js'*}
 {pageaddvar name='javascript' value='jquery'}
 {* Highcharts does client-side graphs in javascript *}
 {pageaddvar name='javascript' value='modules/DbtDiary/javascript/highcharts.js'}
