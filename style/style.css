@@ -54,9 +54,10 @@ div.skills
     list-style-image: url(/images/icons/extrasmall/edit_add.png);
     line-height: 1.8;
 }
-#content li.skills:hover
+#content li.skills:hover,
+#content td.skillsused:hover
 {
-    background-color: lightsteelblue;
+    background: lightsteelblue;
      -moz-border-radius: 3px;
 }
 

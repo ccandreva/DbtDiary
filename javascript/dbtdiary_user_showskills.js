@@ -14,7 +14,8 @@
     $(document).ready(function() {
         //$('img#skillWaiting').hide();
         $( "#accordion" ).accordion({ autoHeight: false });
-        $("li").click(skillHander);
+        $("li.skills").click(skillHander);
+        $("td.skillsused").click(skillusedHander);
         skillHide(initialSkills);
     });
 
@@ -42,4 +43,24 @@
             $('#skill' + skills[i]).hide();
         }
     }
+
+    // Handler functions go here.
+    function skillusedHander() {
+        $('img#skillWaiting').show();
+        $.getJSON('/ajax.php',{
+            module: 'DbtDiary', func: 'removeskill',
+            date: date,
+            skillused: $(this).attr('id')
+        }, skillusedCallback);
+    }
+    
+    function skillusedCallback(data){
+        $('img#skillWaiting').hide();
+        $('#SkillsUsed').html(data.data.output);
+        alert(data.data.id);
+        $('#'+data.data.id).show('slow');
+    }
+    
+
+
 }(jQuery) );

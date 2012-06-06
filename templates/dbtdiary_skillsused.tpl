@@ -11,7 +11,7 @@
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
     <tr>
-        <th id="skillshead" colspan="3" ">
+        <th id="skillshead" colspan="3">
             Skills Used: 
             <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
         </th>
@@ -22,7 +22,7 @@
         <tr>
             {section name="cols" start=0 loop=3}
                 {if $skills[$i]}
-                    <td>{$skills[$i].module} : {$skills[$i].heading} : {$skills[$i].name}</td>
+                    <td class="skillsused" id="skillused{$skills[$i].id}" sid="{$skills[$i].skill_id}">{$skills[$i].module} : {$skills[$i].heading} : {$skills[$i].name}</td>
                 {/if}
                 {assign var=i value=$i+$n}
             {/section}

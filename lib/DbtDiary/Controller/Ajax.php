@@ -43,5 +43,39 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         );
         return new Zikula_Response_Ajax($response);
    }
-    
+
+    public function removeskill()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
+        $this->throwForbiddenUnless(!$ret);
+        
+        $skill = $this->request->query->get('skillused');
+        $suid = preg_replace('/[^0-9]+/','',$skill);
+        
+        $date = $this->request->query->get('date');
+        $sqldate = "$date 00:00:00";
+        
+        // Validate skill sent back in, make sure it is real.
+        $obj = DBUtil::selectObjectByID('dbtdiary_skillsused', $suid);
+        if ($obj['id'] == $suid) {
+            $sid = $obj['skill'];
+            $obj = DBUtil::deleteObjectByID('dbtdiary_skillsused', $suid);
+        }
+        
+        $skillsObj = DbtDiary_Util::getSkillsUsed($uid, $sqldate);
+        
+        Zikula_AbstractController::configureView();
+        $this->view->setCaching(Zikula_View::CACHE_DISABLED);
+        $this->view->assign('skills', $skillsObj);
+        $this->view->assign('date', $date);
+        $output = $this->view->fetch('dbtdiary_skillsused.tpl');
+
+        $response = array(
+            'output' => $output,
+            'id'    => "skill$sid",
+        );
+        return new Zikula_Response_Ajax($response);
+   }
+
+   
 }
