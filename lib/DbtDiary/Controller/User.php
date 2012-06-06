@@ -35,6 +35,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $t2 = $t1 - (86400 * 7);
         foreach ( array($t1, $t2) as $t) {
             $data = array();
+            $weekstart = $t;
             for ($i = 1; $i<=7; $i++) {
                 $date = date('Y-m-d', $t);
                 $dateSQL = "$date 00:00:00";
@@ -45,7 +46,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
                 if ($skillsObj[$dateSQL]) $data[$date]['skills'] = 'y';
                 if ($date <= $today) $data[$date]['canedit'] = true;
             }
-            $weeks[] = array('start' => date('Y-m-d', $t), 'data' => $data );
+            $weeks[] = array('start' => date('M d', $weekstart), 'data' => $data );
         }
 
         $this->view->assign('start', $start);

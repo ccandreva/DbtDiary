@@ -27,13 +27,13 @@
 {foreach item=week from=$weeks}
     {assign var=data value=$week.data}
 
-    <table>
+    <table class="DbtSummary">
         <caption>Summary for Week of {$week.start}</caption>
         <thead>
             <tr>
                 <th>&nbsp;</th>
                 {foreach item=datum from=$data}
-                    <th>{$datum.date|date_format:'%a %m/%e'}</th>
+                    <th>{$datum.date|date_format:'%a<br />%b %e'}</th>
                 {/foreach}
             </tr>
         </thead>

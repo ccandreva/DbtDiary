@@ -13,6 +13,11 @@
     float: left;
 }
 
+table.DbtSummary th,
+table.DbtSummary td{
+    text-align: center;
+}
+
 table.emotions{
     border-collapse: collapse;
     border: 1px solid black;
