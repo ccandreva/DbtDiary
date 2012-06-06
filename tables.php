@@ -91,7 +91,7 @@ function DbtDiary_tables()
     'date'      => 'date',
     'goal'      => 'goal',
     'motivators' => 'motivators',
-    'barrriers'  => 'barriers',
+    'barriers'  => 'barriers',
     'done'      => 'done',
     );
 
@@ -101,7 +101,7 @@ function DbtDiary_tables()
     'date'    => 'T NOTNULL',
     'goal'  =>  'C(255)',
     'motivators'  => 'C(255)',
-    'barrriers'  =>  'C(255)',
+    'barriers'  =>  'C(255)',
     'done'      => 'L NULL'
       );
   ObjectUtil::addStandardFieldsToTableDefinition (
