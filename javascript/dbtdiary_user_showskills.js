@@ -57,10 +57,7 @@
     function skillusedCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
-        alert(data.data.id);
         $('#'+data.data.id).show('slow');
     }
-    
-
 
 }(jQuery) );
