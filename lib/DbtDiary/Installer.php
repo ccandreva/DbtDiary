@@ -18,13 +18,16 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
         if ( !DBUtil::createTable('dbtdiary_diary') ) return false;
         DBUtil::createIndex('dbtdiary_diary_Iud', 'dbtdiary_diary', 
                 array('uid', 'date'));
-        if ( !DBUtil::createTable('dbtdiary_dailygoals') ) return false;
-        DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
-                array('uid', 'date'));
         $this->LoadSkills();
         if (!DBUtil::createTable('dbtdiary_skillsused')) return false;
         DBUtil::createIndex('UidDate', 'dbtdiary_skillsused', 
             array('uid', 'date', 'skill'), array('UNIQUE' => true));
+        if ( !DBUtil::createTable('dbtdiary_dailygoals') ) return false;
+        DBUtil::createIndex('UidDate', 'dbtdiary_dailygoals', 
+                array('uid', 'date'));
+        if ( !DBUtil::createTable('dbtdiary_weeklygoals') ) return false;
+        DBUtil::createIndex('UidDate', 'dbtdiary_weeklygoals', 
+                array('uid', 'date'));
 
         return true;
     }
@@ -47,6 +50,12 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
                 if (!DBUtil::createTable('dbtdiary_skillsused')) return false;
                 DBUtil::createIndex('UidDateSkill', 'dbtdiary_skillsused', 
                     array('uid', 'date', 'skill'),
+                    array('UNIQUE' => true) );
+
+            case "0.0.11" :
+                    if ( !DBUtil::createTable('dbtdiary_weeklygoals') ) return false;
+                    DBUtil::createIndex('UidDate', 'dbtdiary_weeklygoals', 
+                    array('uid', 'date'),
                     array('UNIQUE' => true) );
 
              // This break should be after the last upgrade

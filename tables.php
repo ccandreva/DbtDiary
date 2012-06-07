@@ -83,32 +83,6 @@ function DbtDiary_tables()
   ObjectUtil::addStandardFieldsToTableDataDefinition(
           $tables['dbtdiary_diary_column_def']);
 
-  $tables['dbtdiary_dailygoals'] = 'dbtdiary_dailygoals';
-  
-  $tables['dbtdiary_dailygoals_column'] = array(
-    'id'	=> 'id',
-    'uid'      => 'uid',
-    'date'      => 'date',
-    'goal'      => 'goal',
-    'motivators' => 'motivators',
-    'barriers'  => 'barriers',
-    'done'      => 'done',
-    );
-
-  $tables['dbtdiary_dailygoals_column_def'] = array(
-    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
-    'uid'     => 'I UNSIGNED NOTNULL',
-    'date'    => 'T NOTNULL',
-    'goal'  =>  'C(255)',
-    'motivators'  => 'C(255)',
-    'barriers'  =>  'C(255)',
-    'done'      => 'L NULL'
-      );
-  ObjectUtil::addStandardFieldsToTableDefinition (
-          $tables['dbtdiary_dailygoals_column'], '');
-  ObjectUtil::addStandardFieldsToTableDataDefinition(
-          $tables['dbtdiary_dailygoals_column_def']);
-
 
   $tables['dbtdiary_modules'] = 'dbtdiary_modules';
   $tables['dbtdiary_modules_column'] = array(
@@ -159,7 +133,54 @@ function DbtDiary_tables()
     'date'    => 'T NOTNULL',
     'skill'	=> 'I UNSIGNED',
     );
-    
+
+  $tables['dbtdiary_dailygoals'] = 'dbtdiary_dailygoals';
+  $tables['dbtdiary_dailygoals_column'] = array(
+    'id'	=> 'id',
+    'uid'      => 'uid',
+    'date'      => 'date',
+    'goal'      => 'goal',
+    'motivators' => 'motivators',
+    'barriers'  => 'barriers',
+    'done'      => 'done',
+    );
+  $tables['dbtdiary_dailygoals_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'     => 'I UNSIGNED NOTNULL',
+    'date'    => 'T NOTNULL',
+    'goal'  =>  'C(255)',
+    'motivators'  => 'C(255)',
+    'barriers'  =>  'C(255)',
+    'done'      => 'L NULL'
+      );
+  ObjectUtil::addStandardFieldsToTableDefinition (
+          $tables['dbtdiary_dailygoals_column'], '');
+  ObjectUtil::addStandardFieldsToTableDataDefinition(
+          $tables['dbtdiary_dailygoals_column_def']);
+
+  $tables['dbtdiary_weeklygoals'] = 'dbtdiary_weeklygoals';
+  $tables['dbtdiary_weeklygoals_column'] = array(
+    'id'        => 'id',
+    'uid'       => 'uid',
+    'date'      => 'date',
+    'goal'      => 'goal',
+    'steps'     => 'steps',
+    'signs'     => 'signs',
+    'steps2'    => 'steps2',
+    'signs2'    => 'signs2',
+    );
+  $tables['dbtdiary_weeklygoals_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'       => 'I UNSIGNED NOTNULL',
+    'date'      => 'D NOTNULL',
+    'goal'      => 'C(255)',
+    'steps'     => 'C(255)',
+    'signs'     => 'C(255)',
+    'steps2'    => 'C(255)',
+    'signs2'    => 'C(255)',
+      );
+
+  
   return $tables;
 
 }
