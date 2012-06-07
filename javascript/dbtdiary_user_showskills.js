@@ -35,6 +35,7 @@
     function skillCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
+        $("td.skillsused").click(skillusedHander);
         $('#'+data.data.id).hide('slow');
     }
     
