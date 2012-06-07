@@ -10,10 +10,10 @@
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
     <tr>
-        <th id="skillshead" colspan="3">
+        <caption>
             Skills Used: 
             <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
-        </th>
+        </caption>
     </tr>
     {*foreach item=skill from=$skills*}
     {section name="skills" start=0 loop=$n}
