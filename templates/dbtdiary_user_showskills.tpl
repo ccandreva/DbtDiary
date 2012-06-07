@@ -21,10 +21,21 @@
 { include file="dbtdiary_user_menu.tpl" }
 
 
+<h3>Skills for {$date}</h3>
+<br />
+<p class="z-formnote z-informationmsg">
+    These are the skills you used today. To remove one, simply click on it.
+</p>
 <div id="SkillsUsed">
     {include file='dbtdiary_skillsused.tpl'}
 </div>
 
+<br />
+
+<p class="z-formnote z-informationmsg">
+    Select skills that you used today by clicking on the in the window below. 
+    Click on a DBT module name to show the skills in that module.
+</p>
 <div id="accordion">
     {foreach item=module from=$modules}
 	<h3><a href="#">{$module.name}</a></h3>

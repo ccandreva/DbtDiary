@@ -88,11 +88,11 @@ h3.skills
     line-height: 1.1;
 }
 
-table#SkillsUsed
+table#SkillsUsedTable
 {
     width: 100%;
 }
-table#SkillsUsed td
+table#SkillsUsedTable td
 {
     padding-left: 20px;
     padding-right: 20px;
