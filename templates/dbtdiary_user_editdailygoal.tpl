@@ -25,7 +25,7 @@
         <div class="z-formrow">
             {formlabel for="goal" __text="Goal" mandatorysym=1}
             {formtextinput textMode="multiline" rows="4" cols="50"
-                maxLength="255" id="comments" mandatory=1}
+                maxLength="255" id="goal" mandatory=1}
         </div>
 
         <div class="z-formrow">
