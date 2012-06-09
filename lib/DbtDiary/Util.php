@@ -15,8 +15,7 @@ class DbtDiary_Util
     {
 
         // If not logged in, redirect to login screen
-        $uid = UserUtil::getVar('uid');
-	if ($uid <= 1)
+        if (!UserUtil::isLoggedIn()) {
 	{
 	    $url = ModUtil::url('users', 'user', 'loginscreen',
 		    array( 'returnpage' => urlencode(System::getCurrentUri()),
@@ -29,11 +28,14 @@ class DbtDiary_Util
         if (!SecurityUtil::checkPermission('DbtDiary::', '::', $access)) {
             return LogUtil::registerPermissionError();
         }
+
+        $uid = UserUtil::getVar('uid');
         
         // Return false to signify everything is OK.
         return false;
     }
-
+}
+    
     public function getSkillsUsed($uid, $date)
     {
         $joinInfo = array(
