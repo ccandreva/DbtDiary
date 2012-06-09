@@ -17,7 +17,7 @@ class DbtDiary_Util
         // If not logged in, redirect to login screen
         if (!UserUtil::isLoggedIn()) {
 	{
-	    $url = ModUtil::url('users', 'user', 'loginscreen',
+	    $url = ModUtil::url('users', 'user', 'login',
 		    array( 'returnpage' => urlencode(System::getCurrentUri()),
 			)
 	    );
