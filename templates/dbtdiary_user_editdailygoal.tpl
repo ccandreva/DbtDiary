@@ -7,16 +7,6 @@
 {insert name='getstatusmsg' module='DbtDiary'}
 
 {nocache}
-{form cssClass="z-form"}
-    <a href="{modurl modname="dbtdiary" func="editdailygoal"
-        date=$date-86400}">Yesterday</a>
-
-    {formdateinput id="jumpdate" width=6em}
-    {formbutton commandName="Jump" __text="Edit Date" }
-        
-    <a href="{modurl modname="dbtdiary" func="editdailygoal"
-        date=$date+86400}">Tomorrow</a>
-        <br />
         {formvalidationsummary}
 
 

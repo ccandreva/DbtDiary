@@ -17,8 +17,8 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         if ($ret) return $ret;
 
         DbtDiary_Util::getWeek($start, $end);
-        $startSQL = "$start 00:00:00";
-        $endSQL = "$end 00:00:00";
+        //$startSQL = "$start 00:00:00";
+        //$endSQL = "$end 00:00:00";
         $today = date('Y-m-d');
         
         $where = "uid=$uid"; // and date>='$startSQL' and date <='$endSQL'";
@@ -26,6 +26,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
             '',-1, -1, 'date', null, null, array('id','date'));
         $dailygoalsObj = DBUtil::selectObjectArray ('dbtdiary_dailygoals', $where,
             '',-1, -1, 'date', null, null, array('id','date'));
+
         $where = "skillsused_uid=$uid"; // and skillsused_date>='$startSQL' and skillsused_date <='$endSQL'";
         $skillsObj = DBUtil::selectObjectArray ('dbtdiary_skillsused', $where,
             '',-1, -1, 'date', null, null, array('id', 'date'), 'y');
@@ -46,7 +47,12 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
                 if ($skillsObj[$dateSQL]) $data[$date]['skills'] = 'y';
                 if ($date <= $today) $data[$date]['canedit'] = true;
             }
-            $weeks[] = array('start' => date('M d', $weekstart), 'data' => $data );
+            $where = "uid=$uid and date='" . date('Y-m-d', $weekstart) . "'";
+            $weeklygoalsObj = DBUtil::selectObjectArray ('dbtdiary_weeklygoals', $where,
+                '',-1, -1, '', null, null, array('id','date'));
+            $weeks[] = array('start' => date('M d', $weekstart), 
+                'weeklygoal' => $weeklygoalsObj,
+                'data' => $data );
         }
 
         $this->view->assign('start', $start);
@@ -106,15 +112,31 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
         if ($ret) return $ret;
 
-        $this->view->assign('templatetitle', 'DbtDiary :: Edit Daily Goal');
         $date = FormUtil :: getPassedValue('date');
         $view = FormUtil::newForm('DbtDiary', $this);
-        $view->assign('templatetitle', 'DbtDiary :: Edit Diary');
+        $view->assign('templatetitle', 'DbtDiary :: Edit Daily Goal');
 
         $tmplfile = 'dbtdiary_user_editdailygoal.tpl';
         $args = array('uid' => $uid);
         if ($date) $args['date'] = $date;
         $formobj = new DbtDiary_Form_Handler_EditDailyGoal($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+    }
+
+    public function EditWeeklyGoal()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+
+        $date = FormUtil :: getPassedValue('date');
+        $view = FormUtil::newForm('DbtDiary', $this);
+        $view->assign('templatetitle', 'DbtDiary :: Edit Weekly Goal');
+
+        $tmplfile = 'dbtdiary_user_editweeklygoal.tpl';
+        $args = array('uid' => $uid);
+        if ($date) $args['date'] = $date;
+        $formobj = new DbtDiary_Form_Handler_EditWeeklyGoal($args);
         $output = $view->execute($tmplfile, $formobj);
         return $output;
     }

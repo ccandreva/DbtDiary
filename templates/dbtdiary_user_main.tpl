@@ -71,6 +71,14 @@
                     </td>
                 {/foreach}
             </tr>
+            <tr>
+                <th>Weekly Goal</th>
+                <td>
+                    {if $week.weeklygoal}{$Done.imgtag}{else}{$ToDo.imgtag}{/if}
+                    <a href="{modurl modname="dbtdiary" func="EditWeeklyGoal" 
+                        date=$week.weeklygoal[0].date}">{$editIcon.imgtag}</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 
