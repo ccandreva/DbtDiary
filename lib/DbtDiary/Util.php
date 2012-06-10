@@ -14,6 +14,8 @@ class DbtDiary_Util
     public function checkuser(&$uid, $access = ACCESS_READ)
     {
 
+        $uid = UserUtil::getVar('uid');
+        
         // If not logged in, redirect to login screen
         if (!UserUtil::isLoggedIn()) {
 	{
@@ -29,8 +31,6 @@ class DbtDiary_Util
             return LogUtil::registerPermissionError();
         }
 
-        $uid = UserUtil::getVar('uid');
-        
         // Return false to signify everything is OK.
         return false;
     }
