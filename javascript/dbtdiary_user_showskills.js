@@ -59,6 +59,7 @@
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
         $('#'+data.data.id).show('slow');
+        $("td.skillsused").click(skillusedHander);
     }
 
 }(jQuery) );
