@@ -17,7 +17,7 @@ function DbtDiary_tables()
    * This is the information on the main Diary Card, one table.
    * One record per day per user
    */
-  $tables['dbtdiary_diary'] = DBUtil::getLimitedTablename('dbtdiary_diary');
+  $tables['dbtdiary_diary'] = 'dbtdiary_diary';
   
   $tables['dbtdiary_diary_column'] = array(
     'id'	=> 'id',
@@ -132,6 +132,34 @@ function DbtDiary_tables()
     'uid'	=> 'I UNSIGNED',
     'date'    => 'T NOTNULL',
     'skill'	=> 'I UNSIGNED',
+    );
+
+  $tables['dbtdiary_distress_levels'] = 'dbtdiary_distress_levels';
+  $tables['dbtdiary_distress_levels_column'] = array(
+    'id'	=> 'distress_levels_id',
+    'before'	=> 'distress_levels_before',
+    'after'      => 'distress_levels_after',
+    );
+  $tables['dbtdiary_distress_levels_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'before'	=> 'I1 UNSIGNED',
+    'after'    => 'I1 UNSIGNED',
+    );
+
+  $tables['dbtdiary_proscons'] = 'dbtdiary_pros_cons';
+  $tables['dbtdiary_proscons_column'] = array(
+    'id'	=> 'proscons_id',
+    'tolerate_pros'	=> 'proscons_tolerate_pros',
+    'tolerate_cons'      => 'proscons_tolerate_cons',
+    'nottolerate_pros'	=> 'proscons_nottolerate_pros',
+    'nottolerate_cons'      => 'proscons_nottolerate_cons',
+    );
+  $tables['dbtdiary_proscons_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'tolerate_pros'	=> 'C(255)',
+    'tolerate_cons'      => 'C(255)',
+    'nottolerate_pros'	=> 'C(255)',
+    'nottolerate_cons'      => 'C(255)',
     );
 
   $tables['dbtdiary_dailygoals'] = 'dbtdiary_dailygoals';
