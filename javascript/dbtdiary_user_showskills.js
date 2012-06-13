@@ -15,7 +15,7 @@
         //$('img#skillWaiting').hide();
         $( "#accordion" ).accordion({ autoHeight: false });
         $("li.skills").click(skillHander);
-        $("td.skillsused").click(skillusedHander);
+        $("img.RemoveSkill").click(RemoveSkillHander);
         skillHide(initialSkills);
     });
 
@@ -35,7 +35,7 @@
     function skillCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
-        $("td.skillsused").click(skillusedHander);
+        $("img.RemoveSkill").click(RemoveSkillHander);
         $('#'+data.data.id).hide('slow');
     }
     
@@ -46,20 +46,20 @@
     }
 
     // Handler functions go here.
-    function skillusedHander() {
+    function RemoveSkillHander() {
         $('img#skillWaiting').show();
         $.getJSON('/ajax.php',{
             module: 'DbtDiary', func: 'removeskill',
             date: date,
-            skillused: $(this).attr('id')
-        }, skillusedCallback);
+            skillused: $(this).parent().attr('id')
+        }, RemoveSkillCallback);
     }
     
-    function skillusedCallback(data){
+    function RemoveSkillCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
         $('#'+data.data.id).show('slow');
-        $("td.skillsused").click(skillusedHander);
+        $("img.RemoveSkill").click(RemoveSkillHander);
     }
 
 }(jQuery) );

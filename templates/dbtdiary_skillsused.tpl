@@ -6,6 +6,8 @@
 * @license See license.txt
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
+{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' 
+    alt='Remove Skill' class="RemoveSkill" assign='delIcon'}
 {assign var=n value=$skills|@count}
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
@@ -21,7 +23,8 @@
         <tr>
             {section name="cols" start=0 loop=3}
                 {if $skills[$i]}
-                    <td class="skillsused" id="skillused{$skills[$i].id}" sid="{$skills[$i].skill_id}">{$skills[$i].module} : {$skills[$i].heading} : {$skills[$i].name}</td>
+                    <td class="skillsused" id="skillused{$skills[$i].id}" sid="{$skills[$i].skill_id}">{$skills[$i].module} : {$skills[$i].heading} : {$skills[$i].name}
+                    {$delIcon.imgtag}</td>
                 {/if}
                 {assign var=i value=$i+$n}
             {/section}
