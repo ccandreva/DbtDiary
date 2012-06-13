@@ -7,6 +7,7 @@
 {insert name='getstatusmsg' module='DbtDiary'}
 
 {nocache}
+{form cssClass="z-form"}
         {formvalidationsummary}
 
 
