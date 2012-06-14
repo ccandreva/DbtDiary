@@ -96,7 +96,9 @@ table#SkillsUsedTable td
     padding-left: 20px;
     padding-right: 20px;
 }
-
+td.skillsused img{
+    vertical-align: middle;
+}
 th#skillshead
 {
     line-height: 1.9;
