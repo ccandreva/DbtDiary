@@ -77,5 +77,32 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         return new Zikula_Response_Ajax($response);
    }
 
+   /*
+    * Save/update skill ratings.
+    */
+   
+    public function rateskill()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
+        $this->throwForbiddenUnless(!$ret);
+        
+        $skill = $this->request->query->get('id');
+        $id = preg_replace('/[^0-9]+/','',$skill);
+        $before = $this->request->query->get('before');
+        $after = $this->request->query->get('after');
+        $table = 'dbtdiary_distress_levels';
+        $obj = DBUtil::selectObjectById($table, $id, 'id', array('id'));
+        $obj['before'] = $before;
+        $obj['after'] = $after;
+        if ($obj['id'] == $id) {
+            $res = DBUTil::updateObject ($obj, $table);
+        }   else {
+            $obj['id'] = $id;
+            $res = DBUTil::insertObject($obj, $table, true);
+        }
+        return new Zikula_Response_Ajax(null);
+        
+    }
+    
    
 }

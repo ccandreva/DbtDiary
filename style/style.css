@@ -98,6 +98,13 @@ table#SkillsUsedTable td
 }
 td.skillsused img{
     vertical-align: middle;
+    padding: 1px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+td.skillsused img:hover{
+    opacity: 1.0;
+    filter: alpha(opacity=100);
 }
 th#skillshead
 {
@@ -110,6 +117,14 @@ img#skillWaiting
     border: none;
     display: none;
 }
+
+#PrePostForm label{
+    width: 20em;
+}
+#PrePostForm label, input { display:block; }
+#PrePostForm input.text { margin-bottom:12px; width:50px; padding: .4em; }
+#PrePostForm fieldset { padding:0; border:0; margin-top:25px; }
+
 /* Level classes */
 .Nemotionlevel9,
 .Pemotionlevel0

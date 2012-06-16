@@ -20,6 +20,25 @@
 
 { include file="dbtdiary_user_menu.tpl" }
 
+{* Pop-up form for pre/post skill use *}
+<div id="PrePostForm" title="Distress Tolerance Evaluation">
+    <p class="validateTips">
+        Rate your level of distress tolerance both before and after using the 
+        skill. Use 0 for "No tolerance", to 100 for "Easy tolerance, no problem".
+        If you are about to use the skill, you may rate just your pre-skill ability
+        now, and come back later to finish.
+    </p>
+    <form>
+        <fieldset>
+            <label for="before">Pre-Skill</label>
+            <input  type="text" name="before" id="before" maxlength="3" size="3"
+                     class="text ui-widget-content ui-corner-all">
+            <label for="after">Post-Skill</label>
+            <input  type="text" name="after" id="after" maxlength="3" size="3"
+                    class="text ui-widget-content ui-corner-all">
+        </fieldset>
+    </form>
+</div>
 
 <h3>Skills for {$date}</h3>
 <br />

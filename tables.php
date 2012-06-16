@@ -141,7 +141,7 @@ function DbtDiary_tables()
     'after'      => 'distress_levels_after',
     );
   $tables['dbtdiary_distress_levels_column_def'] = array(
-    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'id'	=> 'I UNSIGNED NOTNULL PRIMARY',
     'before'	=> 'I1 UNSIGNED',
     'after'    => 'I1 UNSIGNED',
     );

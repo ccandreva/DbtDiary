@@ -148,7 +148,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         
         $date = FormUtil :: getPassedValue('date',date('Y-m-d') );
 
-        $this->view->assign('templatetitle', 'DbtDiary :: Skils Test');
+        $this->view->assign('templatetitle', 'DbtDiary :: Skils');
         $this->view->assign('date', $date);
         
         $modules = DBUtil::selectObjectArray ('dbtdiary_modules','','name');

@@ -10,20 +10,45 @@
 // Wrapper for jQuery namespace.
 (function($) {
 
+    /* Some Globals
+     */
+
+     var    Before, After, EditID;  // The ID we are editing in the modal dialog.
+     // skill51 is Pros and Cons
+     // 
     // Initializers, to be run on document ready.
     $(document).ready(function() {
-        //$('img#skillWaiting').hide();
+        Before = $('#before');
+        After = $('#after');
         $( "#accordion" ).accordion({ autoHeight: false });
-        $("li.skills").click(skillHander);
-        $("img.RemoveSkill").click(RemoveSkillHander);
         skillHide(initialSkills);
+        $("li.skills").click(skillHandler);
+        HookEditDelete();
+        $( "#PrePostForm" ).dialog({
+            autoOpen: false,
+            height: 350,
+            width: 350,
+            modal: true,
+            resizable: false,
+            buttons: {
+                    "Rate Skill": RateSkillHandler,
+                    Cancel: function() {
+                            $( this ).dialog( "close" );
+                    }
+            },
+            close: function() {
+                    allFields.val( "" ).removeClass( "ui-state-error" );
+            }
+        });
     });
 
+    function HookEditDelete() {
+        $("img.RemoveSkill").click(RemoveSkillHandler);
+        $("img.EditSkill").click(EditSkillHandler);
+    }
+
     // Handler functions go here.
-    function skillHander() {
-        //alert($(this).attr('id'));
-        //$(this).unbind();
-        //$('th#skillshead').html('Loading . . .');
+    function skillHandler() {
         $('img#skillWaiting').show();
         $.getJSON('/ajax.php',{
             module: 'DbtDiary', func: 'addskill',
@@ -35,7 +60,7 @@
     function skillCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
-        $("img.RemoveSkill").click(RemoveSkillHander);
+        HookEditDelete();
         $('#'+data.data.id).hide('slow');
     }
     
@@ -46,7 +71,7 @@
     }
 
     // Handler functions go here.
-    function RemoveSkillHander() {
+    function RemoveSkillHandler() {
         $('img#skillWaiting').show();
         $.getJSON('/ajax.php',{
             module: 'DbtDiary', func: 'removeskill',
@@ -59,7 +84,40 @@
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
         $('#'+data.data.id).show('slow');
-        $("img.RemoveSkill").click(RemoveSkillHander);
+        HookEditDelete();
+    }
+
+    function EditSkillHandler() {
+        EditID=$(this).parent().attr('id');
+        var name=$(this).parent().attr('name');
+        var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
+        if (nums) {
+            Before.val(nums[1]);
+            After.val(nums[2]);
+        } else {
+            Before.val('');
+            After.val('');
+        }
+        $( '#PrePostForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
+        $( '#PrePostForm' ).dialog( "open" );
+    }
+
+    function RateSkillHandler() {
+        B=Before.val();
+        A=After.val();
+        if (B>=0 && B<=100 && A>=0 && A<=100) {
+            $.getJSON('/ajax.php',{
+                module: 'DbtDiary', func: 'rateskill',
+                id: EditID,
+                before: B,
+                after: A
+            }, skillCallback);
+            if (B == '') { 
+                B = '-';
+            }
+            $( '#' + EditID ).find('span').text('(' + B + '/' + A + ')');
+            $( this ).dialog( "close" );
+        }
     }
 
 }(jQuery) );

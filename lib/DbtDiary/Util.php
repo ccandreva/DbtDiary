@@ -57,6 +57,12 @@ class DbtDiary_Util
                 'compare_field_table' => 'headings_module',
                 'compare_field_join' => 'id'
             ),
+            array ( 'join_table' => 'dbtdiary_distress_levels',
+                'join_field' => array('before', 'after'),
+                'object_field_name' => array('before', 'after'),
+                'compare_field_table' => 'id',
+                'compare_field_join' => 'id'
+            ),
         );
         
         $where = "skillsused_uid=$uid and skillsused_date='$date'";
