@@ -50,6 +50,14 @@
     // Handler functions go here.
     function skillHandler() {
         $('img#skillWaiting').show();
+/*        if (csrftoken) {
+            $.ajaxSetup({
+                headers: {
+                    'X-ZIKULA-AJAX-TOKEN': csrftoken
+                }
+            });
+        }
+*/
         $.getJSON('/ajax.php',{
             module: 'DbtDiary', func: 'addskill',
             date: date,

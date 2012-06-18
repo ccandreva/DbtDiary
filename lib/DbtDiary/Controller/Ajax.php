@@ -13,6 +13,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
 
     public function addskill()
     {
+        // $this->checkAjaxToken();
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
         

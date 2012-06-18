@@ -15,6 +15,7 @@
 {/literal}
     var date='{$date}';
     var initialSkills=[{foreach item=skill from=$skills}'{$skill.skill_id}', {/foreach}];
+    {* var csrftoken="{insert name='csrftoken'}"; *}
 {literal}
 </script>
 
