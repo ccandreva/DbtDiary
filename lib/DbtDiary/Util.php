@@ -122,6 +122,20 @@ class DbtDiary_Util
                      'binge', 'purge', 'alcohol', 'drugs');
     }
 
-    
+/* Urges table again for later
+    public function Urges()
+    {
+        array(
+          array('key' => 'injure', 'name' => 'Injure Self'),  
+          array('key' => 'kill', 'name' => 'Suicide'),  
+          array('key' => 'meds', 'name' => 'Skip Meds'),  
+          array('key' => 'skip', 'name' => 'Skip Job'),  
+          array('key' => 'binge', 'name' => 'Binge'),  
+          array('key' => 'purge', 'name' => 'Purge'),  
+          array('key' => 'alcohol', 'name' => 'Alcohol'),  
+          array('key' => 'drugs', 'name' => 'Drugs'),  
+        );
+    }
+*/  
 }
 ?>
