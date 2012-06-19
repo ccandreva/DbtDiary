@@ -105,5 +105,47 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         
     }
     
+    public function loadProsCons()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
+        $this->throwForbiddenUnless(!$ret);
+        
+        $skill = $this->request->query->get('id');
+        $id = preg_replace('/[^0-9]+/','',$skill);
+        $table = 'dbtdiary_proscons';
+        $obj = DBUtil::selectObjectById($table, $id, 'id', array('id'));
+        
+        
+        
+        $obj['behavior'] = $this->request->query->get('behavior');
+        $obj['tolerate_pros'] = $this->request->query->get('tolerate_pros');
+        $obj['tolerate_cons'] = $this->request->query->get('tolerate_cons');
+        $obj['nottolerate_pros'] = $this->request->query->get('nottolerate_pros');
+        $obj['nottolerate_cons'] = $this->request->query->get('nottolerate_cons');
+        if ($obj['id'] == $id) {
+            $res = DBUTil::updateObject ($obj, $table);
+        }   else {
+            $obj['id'] = $id;
+            $res = DBUTil::insertObject($obj, $table, true);
+        }
+        return new Zikula_Response_Ajax(null);
+        
+    }
+
+        public function saveProsCons()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
+        $this->throwForbiddenUnless(!$ret);
+        
+        $skill = $this->request->query->get('id');
+        $id = preg_replace('/[^0-9]+/','',$skill);
+        $table = 'dbtdiary_proscons';
+        $obj = DBUtil::selectObjectById($table, $id, 'id', array('id'));
+
+        return new Zikula_Response_Ajax($obj);
+        
+    }
    
+
+    
 }

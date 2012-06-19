@@ -30,6 +30,8 @@
             width: 350,
             modal: true,
             resizable: false,
+            show: "blind",
+            hide: "blind" ,
             buttons: {
                     "Rate Skill": RateSkillHandler,
                     Cancel: function() {
@@ -37,7 +39,25 @@
                     }
             },
             close: function() {
-                    allFields.val( "" ).removeClass( "ui-state-error" );
+                    //allFields.val( "" ).removeClass( "ui-state-error" );
+            }
+        });
+        $( "#ProsConsForm" ).dialog({
+            autoOpen: false,
+            height: 480,
+            width: 580,
+            modal: true,
+            resizable: false,
+            show: "blind",
+            hide: "blind" ,
+            buttons: {
+                    "Save": ProsConsSave,
+                    Cancel: function() {
+                            $( this ).dialog( "close" );
+                    }
+            },
+            close: function() {
+                    //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
     });
@@ -45,6 +65,7 @@
     function HookEditDelete() {
         $("img.RemoveSkill").click(RemoveSkillHandler);
         $("img.EditSkill").click(EditSkillHandler);
+        $("img.EditProsCons").click(ProsConsHandler);
     }
 
     // Handler functions go here.
@@ -127,5 +148,34 @@
             $( this ).dialog( "close" );
         }
     }
+
+    function ProsConsHandler() {
+        EditID=$(this).parent().attr('id');
+        var name=$(this).parent().attr('name');
+        var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
+/*        if (nums) {
+            Before.val(nums[1]);
+            After.val(nums[2]);
+        } else {
+            Before.val('');
+            After.val('');
+        } */
+        $( '#ProsConsForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
+        $( '#ProsConsForm' ).dialog( "open" );
+    }
+
+    function ProsConsSave() {
+            $.getJSON('/ajax.php',{
+                module: 'DbtDiary', func: 'saveProsCons',
+                id: EditID,
+                behavior: $('#behavior').val(),
+                tolerate_pros: $('#tolerate_pros').val(),
+                tolerate_cons: $('#tolerate_cons').val(),
+                nottolerate_pros: $('#nottolerate_pros').val(),
+                nottolerate_cons: $('#nottolerate_cons').val()
+            }, skillCallback);
+            $( this ).dialog( "close" );
+    }
+
 
 }(jQuery) );

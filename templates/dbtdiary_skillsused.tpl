@@ -10,6 +10,8 @@
     alt='Remove Skill' class="RemoveSkill" assign='delIcon'}
 {img modname='core' src='xedit.png' set='icons/extrasmall' 
     alt='Edit' class="EditSkill" assign='editIcon'}
+{img modname='core' src='xedit.png' set='icons/extrasmall' 
+    alt='Edit' class="EditProsCons" assign='ProsConsIcon'}
 {assign var=n value=$skills|@count}
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
@@ -29,7 +31,11 @@
                         {$skills[$i].module} : {$skills[$i].heading} : {$skills[$i].name}
                         {if $skills[$i].module == 'Distress Tolerance'}
                             <span id="rating{$skills[$i].id}">{if $skills[$i].before}({$skills[$i].before}/{$skills[$i].after|default:'-'}){/if}</span>
-                            {$editIcon.imgtag}
+                            {if $skills[$i].skill_id == 51}
+                                {$ProsConsIcon.imgtag}
+                            {else}
+                                {$editIcon.imgtag}
+                            {/if}
                         {/if}
                         {$delIcon.imgtag}
                     </td>

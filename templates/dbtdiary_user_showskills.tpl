@@ -41,6 +41,48 @@
     </form>
 </div>
 
+{* Pop-up form for PROS and CONS skill *}
+<div id="ProsConsForm" title="PROS and CONS Evaluation">
+    <p class="validateTips">
+        Select a crisis where you found it <strong>really</strong> hard to
+        tolerate distress, avoid destructive behavior, and not act impulsively.
+    </p>
+    <form>
+        <fieldset>
+            <label for="behavior"><strong>Destructive</strong> behavior I wanted to do:</label>
+            <input  type="text" name="behavior" id="behavior" maxlength="100" size="200"
+                     class="text ui-widget-content ui-corner-all">
+            <table>
+                <tr>
+                    <td >
+                        <label for="tolerate_pros"><strong>Tolerating: Pros</strong> <br />(Advantages of tolerating)</label>
+                        <textarea  type="text" name="tolerate_pros" id="tolerate_pros" cols="40" rows="5"
+                                maxlength="255" class="text ui-widget-content ui-corner-all"></textarea>
+                    </td>
+                    <td>
+                        <label for="tolerate_cons"><strong>Tolerating: Cons</strong> <br />(Disadvantages of tolerating)</label>
+                        <textarea  type="text" name="tolerate_cons" id="tolerate_cons" cols="40" rows="5"
+                                maxlength="255" class="text ui-widget-content ui-corner-all"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <label for="nottolerate_pros"><strong>Not Tolerating: Pros</strong><br />(Advantages of not tolerating)</label>
+                        <textarea  type="text" name="nottolerate_pros" id="nottolerate_pros" cols="40" rows="5"
+                                maxlength="255" class="text ui-widget-content ui-corner-all"></textarea>
+                    </td>
+                    <td>
+                        <label for="nottolerate_cons"><strong>Tolerating: Cons</strong> <br />(Disadvantages of not tolerating)</label>
+                        <textarea  type="text" name="nottolerate_cons" id="nottolerate_cons" cols="40" rows="5"
+                                maxlength="255" class="text ui-widget-content ui-corner-all"></textarea>
+                    </td>
+                </tr>
+                    
+            </table>
+        </fieldset>
+    </form>
+</div>
+
 <h3>Skills for {$date}</h3>
 <br />
 <p class="z-formnote z-informationmsg">

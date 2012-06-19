@@ -63,6 +63,12 @@ class DbtDiary_Util
                 'compare_field_table' => 'id',
                 'compare_field_join' => 'id'
             ),
+            array ( 'join_table' => 'dbtdiary_proscons',
+                'join_field' => array('behavior', 'tolerate_pros', 'tolerate_cons', 'nottolerate_pros', 'nottolerate_cons'),
+                'object_field_name' => array('behavior', 'tolerate_pros', 'tolerate_cons', 'nottolerate_pros', 'nottolerate_cons'),
+                'compare_field_table' => 'id',
+                'compare_field_join' => 'id'
+            ),
         );
         
         $where = "skillsused_uid=$uid and skillsused_date='$date'";
