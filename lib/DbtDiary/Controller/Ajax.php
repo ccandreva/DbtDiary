@@ -105,7 +105,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         
     }
     
-    public function loadProsCons()
+    public function saveProsCons()
     {
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
@@ -132,7 +132,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         
     }
 
-        public function saveProsCons()
+    public function loadProsCons()
     {
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
@@ -140,7 +140,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         $skill = $this->request->query->get('id');
         $id = preg_replace('/[^0-9]+/','',$skill);
         $table = 'dbtdiary_proscons';
-        $obj = DBUtil::selectObjectById($table, $id, 'id', array('id'));
+        $obj = DBUtil::selectObjectById($table, $id, 'id');
 
         return new Zikula_Response_Ajax($obj);
         

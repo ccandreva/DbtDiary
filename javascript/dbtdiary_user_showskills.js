@@ -8,23 +8,23 @@
 */
 
 // Wrapper for jQuery namespace.
-(function($) {
+(function ($) {
 
     /* Some Globals
      */
 
-     var    Before, After, EditID;  // The ID we are editing in the modal dialog.
+    var Before, After, EditID;  // The ID we are editing in the modal dialog.
      // skill51 is Pros and Cons
      // 
     // Initializers, to be run on document ready.
     $(document).ready(function() {
         Before = $('#before');
         After = $('#after');
-        $( "#accordion" ).accordion({ autoHeight: false });
+        $("#accordion").accordion({ autoHeight: false });
         skillHide(initialSkills);
         $("li.skills").click(skillHandler);
-        HookEditDelete();
-        $( "#PrePostForm" ).dialog({
+        new HookEditDelete();
+        $("#PrePostForm").dialog({
             autoOpen: false,
             height: 350,
             width: 350,
@@ -42,29 +42,42 @@
                     //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
-        $( "#ProsConsForm" ).dialog({
+        $("#ProsConsForm").dialog({
             autoOpen: false,
             height: 480,
             width: 580,
             modal: true,
             resizable: false,
             show: "blind",
-            hide: "blind" ,
+            hide: "blind",
             buttons: {
-                    "Save": ProsConsSave,
-                    Cancel: function() {
-                            $( this ).dialog( "close" );
-                    }
+		"Save": ProsConsSave,
+		Cancel: function() {
+			$( this ).dialog( "close" );
+		}
             },
             close: function() {
                     //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
+
+	$("img.EditSkill").contextMenu({
+	    menu: 'SkillsMenu'
+	},
+	    function(action, el, pos) {
+	    alert(
+		'Action: ' + action + '\n\n' +
+		'Element ID: ' + $(el).attr('id') + '\n\n' +
+		'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
+		'X: ' + pos.docX + '  Y: ' + pos.docY+ ' (relative to document)'
+		);
+	});
+
     });
 
     function HookEditDelete() {
         $("img.RemoveSkill").click(RemoveSkillHandler);
-        $("img.EditSkill").click(EditSkillHandler);
+        // $("img.EditSkill").click(EditSkillHandler);
         $("img.EditProsCons").click(ProsConsHandler);
     }
 
@@ -79,7 +92,7 @@
             });
         }
 */
-        $.getJSON('/ajax.php',{
+        $.getJSON('/ajax.php', {
             module: 'DbtDiary', func: 'addskill',
             date: date,
             skill: $(this).attr('id')
@@ -152,15 +165,20 @@
     function ProsConsHandler() {
         EditID=$(this).parent().attr('id');
         var name=$(this).parent().attr('name');
-        var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
-/*        if (nums) {
-            Before.val(nums[1]);
-            After.val(nums[2]);
-        } else {
-            Before.val('');
-            After.val('');
-        } */
-        $( '#ProsConsForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
+	$.getJSON('/ajax.php',{
+	    module: 'DbtDiary', func: 'loadProsCons',
+	    id: EditID
+            }, ProsConsHandlerCallback);
+        $('img#skillWaiting').show();
+    }
+
+    function ProsConsHandlerCallback(obj) {
+	$('#behavior').val(obj.data.behavior);
+	$('#tolerate_pros').val(obj.data.tolerate_pros);
+	$('#tolerate_cons').val(obj.data.tolerate_cons);
+	$('#nottolerate_pros').val(obj.data.nottolerate_pros);
+	$('#nottolerate_cons').val(obj.data.nottolerate_cons);
+        $('img#skillWaiting').hide();
         $( '#ProsConsForm' ).dialog( "open" );
     }
 

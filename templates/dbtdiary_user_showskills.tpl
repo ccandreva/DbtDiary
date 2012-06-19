@@ -10,6 +10,8 @@
 {pageaddvar name='javascript' value='jquery' }
 {pageaddvar name='javascript' value='jquery-ui' }
 {pageaddvar name='javascript' value='modules/DbtDiary/javascript/dbtdiary_user_showskills.js'}
+{pageaddvar name='javascript' value='modules/DbtDiary/javascript/jquery.contextMenu.js'}
+{pageaddvar name='stylesheet' value='modules/DbtDiary/style/jquery.contextMenu.css'}
 {* Set up some initial javascript values *}
 <script type="text/javascript">
 {/literal}
@@ -20,6 +22,14 @@
 </script>
 
 { include file="dbtdiary_user_menu.tpl" }
+
+{* Context menu for Skills *}
+<ul id="SkillsMenu" class="contextMenu">
+    <li class="delete"><a href="#remove">Remove Skill</a></li>
+    <li class="rate"><a href="#rate">Rate Skill</a></li>
+    <li class="proscons"><a href="#proscons">Evaluate Pros/Cons</a></li>
+</ul>
+
 
 {* Pop-up form for pre/post skill use *}
 <div id="PrePostForm" title="Distress Tolerance Evaluation">
