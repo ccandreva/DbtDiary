@@ -149,6 +149,7 @@ function DbtDiary_tables()
   $tables['dbtdiary_proscons'] = 'dbtdiary_pros_cons';
   $tables['dbtdiary_proscons_column'] = array(
     'id'	=> 'proscons_id',
+    'behavior'  => 'proscons_behavior',
     'tolerate_pros'	=> 'proscons_tolerate_pros',
     'tolerate_cons'      => 'proscons_tolerate_cons',
     'nottolerate_pros'	=> 'proscons_nottolerate_pros',
@@ -156,6 +157,7 @@ function DbtDiary_tables()
     );
   $tables['dbtdiary_proscons_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'behavior'  => 'C(255)',
     'tolerate_pros'	=> 'C(255)',
     'tolerate_cons'      => 'C(255)',
     'nottolerate_pros'	=> 'C(255)',
@@ -208,6 +210,21 @@ function DbtDiary_tables()
     'signs2'    => 'C(255)',
       );
 
+/* urges table, not using yet.
+  $tables['dbtdiary_urges'] = 'dbtdiary_urges';
+  $tables['dbtdiary_urges_column'] = array(
+    'id'        => 'id',
+    'uid'       => 'uid',
+    'key'       => 'key',
+    'name'      => 'name',
+    );
+  $tables['dbtdiary_urges_column_def'] = array(
+    'id'        => 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'       => 'I UNSIGNED NOTNULL',
+    'key'       => 'C(255)',
+    'name'      => 'C(255)',
+    );
+*/  
   
   return $tables;
 
