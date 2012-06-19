@@ -15,12 +15,10 @@
 {assign var=n value=$skills|@count}
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
-    <tr>
-        <caption>
-            Skills Used: 
-            <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
-        </caption>
-    </tr>
+    <caption>
+        Skills Used: 
+        <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
+    </caption>
     {section name="skills" start=0 loop=$n}
         {assign var=i value=$smarty.section.skills.index}
         <tr>
