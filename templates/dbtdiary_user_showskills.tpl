@@ -104,7 +104,7 @@
         <div class="{$module.name|strip:''}">
             {foreach item=head from=$module.headings}
                 <div class="skills {$head.name|strip:''}">
-                    <h3 class="skills">{$head.name}</h3>
+                    <h4 class="skills">{$head.name}</h4>
                     <ul>
                     {foreach item=skill from=$head.skills}
                         <li class="skills" id="skill{$skill.id}">{$skill.htname}</li>
