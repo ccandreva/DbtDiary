@@ -60,6 +60,10 @@
                     //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
+	$("img.EditSkill").contextMenu({
+	    menu: 'SkillsMenu',
+	    Button: 0
+	}, SkillMenuCallback);
 
     });
     
@@ -84,13 +88,9 @@
 
     function HookEditDelete() {
         $("img.RemoveSkill").click(RemoveSkillHandler);
-        $("img.EditSkill").click(EditSkillHandler);
+        //$("img.EditSkill").click(EditSkillHandler);
         $("img.EditProsCons").click(ProsConsHandler);
 
-	$("img.EditSkill").contextMenu({
-	    menu: 'SkillsMenu',
-	    Button: 2
-	}, SkillMenuCallback);
     }
 
     // Handler functions go here.
@@ -113,9 +113,12 @@
     
     function skillCallback(data){
         $('img#skillWaiting').hide();
-        $('#SkillsUsed').html(data.data.output);
+	if (data.data) {
+	    $('#SkillsUsed').html(data.data.output);
+	    $('#'+data.data.id).hide('slow');
+	}
+	if (data.message) $('p#message').text(data.message);
         HookEditDelete();
-        $('#'+data.data.id).hide('slow');
     }
     
     function skillHide(skills){
@@ -137,7 +140,7 @@
     function RemoveSkillCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
-        $('#'+data.data.id).show('slow');
+        if (data.data) $('#'+data.data.id).show('slow');
         HookEditDelete();
     }
 

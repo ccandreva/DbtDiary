@@ -97,11 +97,13 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         $obj['after'] = $after;
         if ($obj['id'] == $id) {
             $res = DBUTil::updateObject ($obj, $table);
+	    $message = "Updated";
         }   else {
             $obj['id'] = $id;
             $res = DBUTil::insertObject($obj, $table, true);
+	    $message = "Added";
         }
-        return new Zikula_Response_Ajax(null);
+        return new Zikula_Response_Ajax(array('message' => $message));
         
     }
     

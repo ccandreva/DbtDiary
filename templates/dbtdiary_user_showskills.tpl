@@ -95,6 +95,7 @@
 
 <h3>Skills for {$date}</h3>
 <br />
+<p id="message"></p>
 <p class="z-formnote z-informationmsg">
     These are the skills you used today. To remove one, simply click on it.
 </p>
