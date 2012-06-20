@@ -12,8 +12,8 @@
 // This plugin is dual-licensed under the GNU General Public License
 //   and the MIT License and is copyright A Beautiful Site, LLC.
 //
-(function ($) {
-if(jQuery)( function() {
+
+if(jQuery)( function($) {
 	$.extend($.fn, {
 		
 		contextMenu: function(o, callback) {
@@ -214,4 +214,3 @@ if(jQuery)( function() {
 		
 	});
 })(jQuery);
-}(jQuery) );
