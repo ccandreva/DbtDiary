@@ -61,24 +61,36 @@
             }
         });
 
-	$("img.EditSkill").contextMenu({
-	    menu: 'SkillsMenu'
-	},
-	    function(action, el, pos) {
-	    alert(
-		'Action: ' + action + '\n\n' +
-		'Element ID: ' + $(el).attr('id') + '\n\n' +
-		'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
-		'X: ' + pos.docX + '  Y: ' + pos.docY+ ' (relative to document)'
-		);
-	});
-
     });
+    
+    function SkillMenuCallback(action, el, pos) {
+	switch (action)
+	{
+	    case 'remove':
+		$('img#skillWaiting').show();
+		$.getJSON('/ajax.php',{
+		    module: 'DbtDiary', func: 'removeskill',
+		    date: date,
+		    skillused: $(el).parent().attr('id')
+		}, RemoveSkillCallback);
+		break;
+
+	    case 'rate':
+		EditSkillHandler(el);
+		break;
+	    
+	}
+    }
 
     function HookEditDelete() {
         $("img.RemoveSkill").click(RemoveSkillHandler);
         $("img.EditSkill").click(EditSkillHandler);
         $("img.EditProsCons").click(ProsConsHandler);
+
+	$("img.EditSkill").contextMenu({
+	    menu: 'SkillsMenu',
+	    Button: 2
+	}, SkillMenuCallback);
     }
 
     // Handler functions go here.
@@ -129,9 +141,9 @@
         HookEditDelete();
     }
 
-    function EditSkillHandler() {
-        EditID=$(this).parent().attr('id');
-        var name=$(this).parent().attr('name');
+    function EditSkillHandler(_this) {
+        EditID = $(_this).parent().attr('id');
+        var name = $(_this).parent().attr('name');
         var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
         if (nums) {
             Before.val(nums[1]);
