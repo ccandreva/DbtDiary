@@ -24,20 +24,24 @@ if(jQuery)( function() {
 			// 0 needs to be -1 for expected results (no fade)
 			if( o.inSpeed == 0 ) o.inSpeed = -1;
 			if( o.outSpeed == 0 ) o.outSpeed = -1;
+                        
 			// Loop each context menu
 			$(this).each( function() {
 				var el = $(this);
 				var offset = $(el).offset();
 				// Add contextMenu class
 				$('#' + o.menu).addClass('contextMenu');
+                                
 				// Simulate a true right click
 				$(this).mousedown( function(e) {
 					var evt = e;
 					evt.stopPropagation();
+                                        // And now the mouseup function
 					$(this).mouseup( function(e) {
 						e.stopPropagation();
 						var srcElement = $(this);
 						$(this).unbind('mouseup');
+                                                // And if it's the left button, do the work
 						if( evt.button == 2 ) {
 							// Hide context menus that may be showing
 							$(".contextMenu").hide();
