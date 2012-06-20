@@ -77,7 +77,7 @@
 
     function HookEditDelete() {
         $("img.RemoveSkill").click(RemoveSkillHandler);
-        // $("img.EditSkill").click(EditSkillHandler);
+        $("img.EditSkill").click(EditSkillHandler);
         $("img.EditProsCons").click(ProsConsHandler);
     }
 
