@@ -17,13 +17,10 @@
 {assign var=n value=$skills|@count}
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
-    <caption>
-        Skills Used: 
-        <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
-    </caption>
     <tr>
         <th colspan="5">
         These are the skills you used today. To remove one, simply click on it.
+        <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
         </th>
     </tr>
         

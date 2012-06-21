@@ -93,13 +93,10 @@
 </div>
 
 <h3>Skills for {$date}</h3>
-<br />
 <p id="message"></p>
 <div id="SkillsUsed">
     {include file='dbtdiary_skillsused.tpl'}
 </div>
-
-<br />
 
 <p class="z-formnote z-informationmsg">
     Select skills that you used today by clicking on the in the window below. 
