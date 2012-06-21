@@ -83,6 +83,9 @@
 		EditSkillHandler(el);
 		break;
 	    
+            default:
+                alert('Invalid action: ' + action);
+                
 	}
     }
 
@@ -116,8 +119,8 @@
 	if (data.data) {
 	    $('#SkillsUsed').html(data.data.output);
 	    $('#'+data.data.id).hide('slow');
+            $('p#message').text(data.data.message);
 	}
-	if (data.message) $('p#message').text(data.message);
         HookEditDelete();
     }
     
