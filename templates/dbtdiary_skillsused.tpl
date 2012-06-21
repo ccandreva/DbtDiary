@@ -12,6 +12,8 @@
     alt='View actions for this skill.' class="EditDistress" assign='menuIconDistress'}
 {img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
     alt='View actions for this skill.' class="EditProsCons" assign='menuIconProsCons'}
+    
+{nocache}
 {assign var=n value=$skills|@count}
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
@@ -50,3 +52,4 @@
         </tr>                
     {/section}
 </table>
+{/nocache}
