@@ -153,14 +153,14 @@ if(jQuery)( function($) {
 		disableContextMenuItems: function(o) {
 			if( o == undefined ) {
 				// Disable all
-				$(this).find('LI').addClass('disabled');
+				$(this).find('li').addClass('disabled');
 				return( $(this) );
 			}
 			$(this).each( function() {
 				if( o != undefined ) {
 					var d = o.split(',');
 					for( var i = 0; i < d.length; i++ ) {
-						$(this).find('A[href="' + d[i] + '"]').parent().addClass('disabled');
+						$(this).find('a[href="' + d[i] + '"]').parent().addClass('disabled');
 						
 					}
 				}
@@ -172,14 +172,14 @@ if(jQuery)( function($) {
 		enableContextMenuItems: function(o) {
 			if( o == undefined ) {
 				// Enable all
-				$(this).find('LI.disabled').removeClass('disabled');
+				$(this).find('li.disabled').removeClass('disabled');
 				return( $(this) );
 			}
 			$(this).each( function() {
 				if( o != undefined ) {
 					var d = o.split(',');
 					for( var i = 0; i < d.length; i++ ) {
-						$(this).find('A[href="' + d[i] + '"]').parent().removeClass('disabled');
+						$(this).find('a[href="' + d[i] + '"]').parent().removeClass('disabled');
 						
 					}
 				}
