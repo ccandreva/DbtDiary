@@ -97,13 +97,14 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
         $obj['after'] = $after;
         if ($obj['id'] == $id) {
             $res = DBUTil::updateObject ($obj, $table);
-	    $message = "Updated";
-        }   else {
+	    $message = "updated";
+        } else {
             $obj['id'] = $id;
             $res = DBUTil::insertObject($obj, $table, true);
-	    $message = "Added";
+	    $message = "added";
         }
-        return new Zikula_Response_Ajax(array('message' => $message));
+        $response = array('message' => "Your rating has been " . $message . '.');
+        return new Zikula_Response_Ajax($response);
         
     }
     
