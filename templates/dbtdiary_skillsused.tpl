@@ -6,12 +6,12 @@
 * @license See license.txt
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
-{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' 
-    alt='Remove Skill' class="RemoveSkill" assign='delIcon'}
-{img modname='core' src='xedit.png' set='icons/extrasmall' 
-    alt='Edit' class="EditSkill" assign='editIcon'}
-{img modname='core' src='xedit.png' set='icons/extrasmall' 
-    alt='Edit' class="EditProsCons" assign='ProsConsIcon'}
+{img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
+    alt='View actions for this skill.' class="EditSkill" assign='menuIcon'}
+{img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
+    alt='View actions for this skill.' class="EditDistress" assign='menuIconDistress'}
+{img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
+    alt='View actions for this skill.' class="EditProsCons" assign='menuIconProsCons'}
 {assign var=n value=$skills|@count}
 {assign var=n value=$n/3|ceil}
 <table id="SkillsUsedTable">
@@ -19,6 +19,12 @@
         Skills Used: 
         <img id="skillWaiting" src="images/ajax/icon_animated_busy.gif" />
     </caption>
+    <tr>
+        <th colspan="5">
+        These are the skills you used today. To remove one, simply click on it.
+        </th>
+    </tr>
+        
     {section name="skills" start=0 loop=$n}
         {assign var=i value=$smarty.section.skills.index}
         <tr>
@@ -30,12 +36,13 @@
                         {if $skills[$i].module == 'Distress Tolerance'}
                             <span id="rating{$skills[$i].id}">{if $skills[$i].before}({$skills[$i].before}/{$skills[$i].after|default:'-'}){/if}</span>
                             {if $skills[$i].skill_id == 51}
-                                {$ProsConsIcon.imgtag}
+                                {$menuIconProsCons.imgtag}
                             {else}
-                                {$editIcon.imgtag}
+                                {$menuIconDistress.imgtag}
                             {/if}
+                        {else}
+                            {$menuIcon.imgtag}
                         {/if}
-                        {$delIcon.imgtag}
                     </td>
                 {/if}
                 {assign var=i value=$i+$n}

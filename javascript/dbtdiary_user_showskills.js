@@ -13,17 +13,17 @@
     /* Some Globals
      */
 
-    var Before, After, EditID;  // The ID we are editing in the modal dialog.
+    var Before, After, EditID, First=true;  // The ID we are editing in the modal dialog.
      // skill51 is Pros and Cons
      // 
     // Initializers, to be run on document ready.
     $(document).ready(function() {
         Before = $('#before');
         After = $('#after');
+//        $("#accordion").accordion({ autoHeight: false });
         $("#accordion").accordion({ autoHeight: false });
         skillHide(initialSkills);
         $("li.skills").click(skillHandler);
-        new HookEditDelete();
         $("#PrePostForm").dialog({
             autoOpen: false,
             height: 350,
@@ -60,14 +60,19 @@
                     //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
-	$("img.EditSkill").contextMenu({
-	    menu: 'SkillsMenu',
-	    Button: 0
-	}, SkillMenuCallback);
+
+        HookEditDelete();
+        
 
     });
     
     function SkillMenuCallback(action, el, pos) {
+
+        // Get the ID of whatever we are working on.
+        // Save in a global so callbacks can use it.
+        EditID = $(el).parent().attr('id');
+        var name = $(el).parent().attr('name');
+        
 	switch (action)
 	{
 	    case 'remove':
@@ -75,13 +80,32 @@
 		$.getJSON('/ajax.php',{
 		    module: 'DbtDiary', func: 'removeskill',
 		    date: date,
-		    skillused: $(el).parent().attr('id')
+		    skillused: EditID
 		}, RemoveSkillCallback);
 		break;
 
 	    case 'rate':
-		EditSkillHandler(el);
+                var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
+                if (nums) {
+                    Before.val(nums[1]);
+                    After.val(nums[2]);
+                } else {
+                    Before.val('');
+                    After.val('');
+                }
+                $( '#PrePostForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
+                $( '#PrePostForm' ).dialog( "open" );
 		break;
+                
+            case 'proscons':
+                // Load the pros/cons information via ajax,
+                // Launch form when the data comes back.
+                $.getJSON('/ajax.php',{
+                    module: 'DbtDiary', func: 'loadProsCons',
+                    id: EditID
+                    }, ProsConsHandlerCallback);
+                $('img#skillWaiting').show();
+                break;
 	    
             default:
                 alert('Invalid action: ' + action);
@@ -90,10 +114,26 @@
     }
 
     function HookEditDelete() {
-        $("img.RemoveSkill").click(RemoveSkillHandler);
-        //$("img.EditSkill").click(EditSkillHandler);
-        $("img.EditProsCons").click(ProsConsHandler);
-
+        if (First) {
+            $('ul#SkillsMenu').clone().attr('id', 'DistressMenu').insertAfter('ul#SkillsMenu');
+            $('ul#SkillsMenu').clone().attr('id', 'ProsConsMenu').insertAfter('ul#SkillsMenu');
+            First = false;
+        }
+	$("img.EditSkill").contextMenu({
+	    menu: 'SkillsMenu',
+	    Button: 0
+	}, SkillMenuCallback);
+	$("img.EditDistress").contextMenu({
+	    menu: 'DistressMenu',
+	    Button: 0
+	}, SkillMenuCallback);
+	$("img.EditProsCons").contextMenu({
+	    menu: 'ProsConsMenu',
+	    Button: 0
+	}, SkillMenuCallback);
+        $('ul#SkillsMenu').disableContextMenuItems('#rate,#proscons');
+        $('ul#DistressMenu').disableContextMenuItems('#proscons');
+        
     }
 
     // Handler functions go here.
@@ -130,36 +170,11 @@
         }
     }
 
-    // Handler functions go here.
-    function RemoveSkillHandler() {
-        $('img#skillWaiting').show();
-        $.getJSON('/ajax.php',{
-            module: 'DbtDiary', func: 'removeskill',
-            date: date,
-            skillused: $(this).parent().attr('id')
-        }, RemoveSkillCallback);
-    }
-    
     function RemoveSkillCallback(data){
         $('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
         if (data.data) $('#'+data.data.id).show('slow');
         HookEditDelete();
-    }
-
-    function EditSkillHandler(_this) {
-        EditID = $(_this).parent().attr('id');
-        var name = $(_this).parent().attr('name');
-        var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
-        if (nums) {
-            Before.val(nums[1]);
-            After.val(nums[2]);
-        } else {
-            Before.val('');
-            After.val('');
-        }
-        $( '#PrePostForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
-        $( '#PrePostForm' ).dialog( "open" );
     }
 
     function RateSkillHandler() {

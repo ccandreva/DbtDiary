@@ -30,7 +30,6 @@
     <li class="proscons"><a href="#proscons">Evaluate Pros/Cons</a></li>
 </ul>
 
-
 {* Pop-up form for pre/post skill use *}
 <div id="PrePostForm" title="Distress Tolerance Evaluation">
     <p class="validateTips">
@@ -96,9 +95,6 @@
 <h3>Skills for {$date}</h3>
 <br />
 <p id="message"></p>
-<p class="z-formnote z-informationmsg">
-    These are the skills you used today. To remove one, simply click on it.
-</p>
 <div id="SkillsUsed">
     {include file='dbtdiary_skillsused.tpl'}
 </div>
