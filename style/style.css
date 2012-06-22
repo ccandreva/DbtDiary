@@ -54,7 +54,7 @@ li.skills
 {
     padding: 0;
     margin: 0;
-    list-style-image: url('/images/icons/extrasmall/edit_add.png');
+    list-style-image: url('../../../images/icons/extrasmall/edit_add.png');
     line-height: 1.8;
 }
 /*#content*/ li.skills:hover
