@@ -14,6 +14,7 @@
      */
 
     var Before, After, EditID, First=true;  // The ID we are editing in the modal dialog.
+    var AjaxPhp=Zikula.Config.baseURL + 'ajax.php';
      // skill51 is Pros and Cons
      // 
     // Initializers, to be run on document ready.
@@ -77,7 +78,7 @@
 	{
 	    case 'remove':
 		$('img#skillWaiting').show();
-		$.getJSON('/ajax.php',{
+		$.getJSON(AjaxPhp,{
 		    module: 'DbtDiary', func: 'removeskill',
 		    date: date,
 		    skillused: EditID
@@ -100,7 +101,7 @@
             case 'proscons':
                 // Load the pros/cons information via ajax,
                 // Launch form when the data comes back.
-                $.getJSON('/ajax.php',{
+                $.getJSON(AjaxPhp,{
                     module: 'DbtDiary', func: 'loadProsCons',
                     id: EditID
                     }, ProsConsHandlerCallback);
@@ -147,7 +148,7 @@
             });
         }
 */
-        $.getJSON('/ajax.php', {
+        $.getJSON(AjaxPhp, {
             module: 'DbtDiary', func: 'addskill',
             date: date,
             skill: $(this).attr('id')
@@ -181,7 +182,7 @@
         B=Before.val();
         A=After.val();
         if (B>=0 && B<=100 && A>=0 && A<=100) {
-            $.getJSON('/ajax.php',{
+            $.getJSON(AjaxPhp,{
                 module: 'DbtDiary', func: 'rateskill',
                 id: EditID,
                 before: B,
@@ -198,7 +199,7 @@
     function ProsConsHandler() {
         EditID=$(this).parent().attr('id');
         var name=$(this).parent().attr('name');
-	$.getJSON('/ajax.php',{
+	$.getJSON(AjaxPhp,{
 	    module: 'DbtDiary', func: 'loadProsCons',
 	    id: EditID
             }, ProsConsHandlerCallback);
@@ -216,7 +217,7 @@
     }
 
     function ProsConsSave() {
-            $.getJSON('/ajax.php',{
+            $.getJSON(AjaxPhp,{
                 module: 'DbtDiary', func: 'saveProsCons',
                 id: EditID,
                 behavior: $('#behavior').val(),
