@@ -135,16 +135,18 @@
 	    menu: 'SkillsMenu',
 	    Button: 0
 	}, SkillMenuCallback);
-	$("img.EditDistress").contextMenu({
+
+        $("img.EditDistress").contextMenu({
 	    menu: 'DistressMenu',
 	    Button: 0
 	}, SkillMenuCallback);
+        $('ul#DistressMenu').disableContextMenuItems('#proscons');
+        
 	$("img.EditProsCons").contextMenu({
 	    menu: 'ProsConsMenu',
 	    Button: 0
 	}, SkillMenuCallback);
         $('ul#SkillsMenu').disableContextMenuItems('#rate,#proscons');
-        $('ul#DistressMenu').disableContextMenuItems('#proscons');
         
     }
 
