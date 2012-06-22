@@ -31,7 +31,7 @@ table.emotions thead th
 
 table.emtiond tr { border: 1px solid black;}
 table.emotions td
-{
+{ 
     width: 2em;
     border: 1px solid black;
     text-align :center;
@@ -45,8 +45,12 @@ table.comments td
 div.skills
 {
     float: left;
-    margin: 0 20px 0 0;
+    margin: 0 ;
     width: 15em;
+}
+div.skills + div.skills
+{
+    margin: 0 0 0 10px;
 }
 
 /* #content li.skills */

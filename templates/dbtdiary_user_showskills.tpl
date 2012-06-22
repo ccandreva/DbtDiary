@@ -103,7 +103,7 @@
     Click on a DBT module name to show the skills in that module.
 </p>
 <div id="AllSkills">
-    <ul>{foreach item=module from=$modules}<li><a href="#{$module.name|strip:''}">{$module.name}</a></li>{/foreach}</ul>
+    <ul>{foreach item="module" from=$modules}<li><a href="#{$module.name|strip:''}">{$module.name}</a></li>{/foreach}</ul>
     {foreach item=module from=$modules}
         <div id="{$module.name|strip:''}">
             {foreach item=head from=$module.headings}
