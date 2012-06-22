@@ -15,13 +15,12 @@
 
     var Before, After, EditID, First=true;  // The ID we are editing in the modal dialog.
     var AjaxPhp=Zikula.Config.baseURL + 'ajax.php';
-     // skill51 is Pros and Cons
-     // 
+    // skill51 is Pros and Cons
+
     // Initializers, to be run on document ready.
     $(document).ready(function() {
         Before = $('#before');
         After = $('#after');
-//        $("#accordion").accordion({ autoHeight: false });
         $("#accordion").accordion({ autoHeight: false });
         skillHide(initialSkills);
         $("li.skills").click(skillHandler);
@@ -64,6 +63,18 @@
 
         HookEditDelete();
         
+        // Return AJAX token in headers
+        if (Zikula.Config.sessionName) {
+            var token = new RegExp(Zikula.Config.sessionName + '=(.*?)(;|$)').exec(document.cookie);
+            if (token[1]) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-ZIKULA-AJAX-TOKEN': token[1]
+                    }
+                });
+            }
+        }
+  
 
     });
     

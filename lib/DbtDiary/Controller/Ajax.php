@@ -13,7 +13,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
 
     public function addskill()
     {
-        // $this->checkAjaxToken();
+        $this->checkAjaxToken();
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
         
@@ -47,6 +47,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
 
     public function removeskill()
     {
+        $this->checkAjaxToken();
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
         
@@ -84,6 +85,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
    
     public function rateskill()
     {
+        $this->checkAjaxToken();
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
         
@@ -110,6 +112,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
     
     public function saveProsCons()
     {
+        $this->checkAjaxToken();
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
         
@@ -137,6 +140,7 @@ class DbtDiary_Controller_Ajax extends Zikula_Controller_AbstractAjax
 
     public function loadProsCons()
     {
+        $this->checkAjaxToken();
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_ADD);
         $this->throwForbiddenUnless(!$ret);
         
