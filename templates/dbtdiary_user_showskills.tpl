@@ -102,7 +102,7 @@
     Select skills that you used today by clicking on the in the window below. 
     Click on a DBT module name to show the skills in that module.
 </p>
-<div id="accordion">
+<div id="AllSkills">
     {foreach item=module from=$modules}
 	<h3><a href="#">{$module.name}</a></h3>
         <div class="{$module.name|strip:''}">

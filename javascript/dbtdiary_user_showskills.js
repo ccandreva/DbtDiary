@@ -21,7 +21,7 @@
     $(document).ready(function() {
         Before = $('#before');
         After = $('#after');
-        $("#accordion").accordion({ autoHeight: false });
+        $("#AllSkills").accordion({ autoHeight: false });
         skillHide(initialSkills);
         $("li.skills").click(skillHandler);
         $("#PrePostForm").dialog({
