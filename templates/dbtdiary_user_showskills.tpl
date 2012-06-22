@@ -103,9 +103,9 @@
     Click on a DBT module name to show the skills in that module.
 </p>
 <div id="AllSkills">
+    <ul>{foreach item=module from=$modules}<li><a href="#{$module.name|strip:''}">{$module.name}</a></li>{/foreach}</ul>
     {foreach item=module from=$modules}
-	<h3><a href="#">{$module.name}</a></h3>
-        <div class="{$module.name|strip:''}">
+        <div id="{$module.name|strip:''}">
             {foreach item=head from=$module.headings}
                 <div class="skills {$head.name|strip:''}">
                     <h4 class="skills">{$head.name}</h4>
@@ -117,5 +117,6 @@
                 </div>
             {/foreach}
         </div>
+	    <div style="clear: left"></div>
     {/foreach}
 </div>
