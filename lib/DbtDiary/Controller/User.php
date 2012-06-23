@@ -151,7 +151,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $this->view->assign('templatetitle', 'DbtDiary :: Skils');
         $this->view->assign('date', $date);
         
-        $modules = DBUtil::selectObjectArray ('dbtdiary_modules','','name');
+        $modules = DBUtil::selectObjectArray ('dbtdiary_modules');
         foreach ($modules as &$mod)
         {
             $id = $mod['id'];
