@@ -109,6 +109,8 @@ td.skillsused img{
 td.skillsused img:hover{
     opacity: 1.0;
     filter: alpha(opacity=100);
+    transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
 }
 th#skillshead
 {
