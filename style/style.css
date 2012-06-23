@@ -53,7 +53,6 @@ div.skills + div.skills
     margin: 0 0 0 10px;
 }
 
-/* #content li.skills */
 li.skills
 {
     padding: 0;
@@ -61,27 +60,31 @@ li.skills
     list-style-image: url('../../../images/icons/extrasmall/edit_add.png');
     line-height: 1.8;
 }
-/*#content*/ li.skills:hover
+li.skills:hover
 {
     background: lightsteelblue;
      -moz-border-radius: 3px;
 }
 
-div.EmotionRegulation .skills
+div#EmotionRegulation .skills
 {
     width: 18em;
 }
-div.EmotionRegulation div.skills.PLEASEMaster
+div#EmotionRegulation div.skills.PLEASEMaster
 {
     width: 15em;
 }
-div.Mindfullness .skills
+div#Mindfullness div.skills
 {
     width: 10em;
 }
 div.skills.InterpersonalSkills
 {
     width: auto;
+}
+div.skills.SelfSoothewithFiveSenses
+{
+    width: 8em;
 }
 h3.skills
 {
