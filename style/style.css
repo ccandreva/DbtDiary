@@ -122,6 +122,9 @@ img#skillWaiting
     border: none;
     display: none;
 }
+.AjaxLoading{
+    background: transparent url('../../../images/ajax/icon_animated_busy.gif') no-repeat center right;
+}
 
 #PrePostForm label{
     width: 20em;

@@ -74,7 +74,6 @@
                 });
             }
         }
-  
 
     });
     
@@ -88,7 +87,6 @@
 	switch (action)
 	{
 	    case 'remove':
-		$('img#skillWaiting').show();
 		$.getJSON(AjaxPhp,{
 		    module: 'DbtDiary', func: 'removeskill',
 		    date: date,
@@ -116,7 +114,6 @@
                     module: 'DbtDiary', func: 'loadProsCons',
                     id: EditID
                     }, ProsConsHandlerCallback);
-                $('img#skillWaiting').show();
                 break;
 	    
             default:
@@ -147,12 +144,19 @@
 	    Button: 0
 	}, SkillMenuCallback);
         $('ul#SkillsMenu').disableContextMenuItems('#rate,#proscons');
+  
+        $('#SkillsUsedTable th')
+            .ajaxStart(function() {
+                $(this).addClass('AjaxLoading');
+            })
+            .ajaxStop(function() {
+                $(this).removeClass('AjaxLoading');
+            });
         
     }
 
     // Handler functions go here.
     function skillHandler() {
-        $('img#skillWaiting').show();
         $.getJSON(AjaxPhp, {
             module: 'DbtDiary', func: 'addskill',
             date: date,
@@ -161,7 +165,6 @@
     }
     
     function skillCallback(data){
-        $('img#skillWaiting').hide();
 	if (data.data) {
 	    $('#SkillsUsed').html(data.data.output);
 	    $('#'+data.data.id).hide('slow');
@@ -177,7 +180,7 @@
     }
 
     function RemoveSkillCallback(data){
-        $('img#skillWaiting').hide();
+        //$('img#skillWaiting').hide();
         $('#SkillsUsed').html(data.data.output);
         if (data.data) $('#'+data.data.id).show('slow');
         HookEditDelete();
@@ -208,7 +211,6 @@
 	    module: 'DbtDiary', func: 'loadProsCons',
 	    id: EditID
             }, ProsConsHandlerCallback);
-        $('img#skillWaiting').show();
     }
 
     function ProsConsHandlerCallback(obj) {
@@ -217,7 +219,6 @@
 	$('#tolerate_cons').val(obj.data.tolerate_cons);
 	$('#nottolerate_pros').val(obj.data.nottolerate_pros);
 	$('#nottolerate_cons').val(obj.data.nottolerate_cons);
-        $('img#skillWaiting').hide();
         $( '#ProsConsForm' ).dialog( "open" );
     }
 
