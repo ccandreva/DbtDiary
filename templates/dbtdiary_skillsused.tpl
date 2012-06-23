@@ -7,11 +7,11 @@
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 *}
 {img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
-    alt='View actions for this skill.' class="EditSkill" assign='menuIcon'}
+    alt='View actions for this skill.' class="EditSkill r90" assign='menuIcon'}
 {img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
-    alt='View actions for this skill.' class="EditDistress" assign='menuIconDistress'}
+    alt='View actions for this skill.' class="EditSkill EditDistress r90" assign='menuIconDistress'}
 {img modname='core' src='/14_layer_lowerlayer.png' set='icons/extrasmall' 
-    alt='View actions for this skill.' class="EditProsCons" assign='menuIconProsCons'}
+    alt='View actions for this skill.' class="EditSkill EditDistress EditProsCons r90" assign='menuIconProsCons'}
     
 {nocache}
 {assign var=n value=$skills|@count}

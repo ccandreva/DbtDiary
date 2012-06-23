@@ -23,13 +23,6 @@
 
 { include file="dbtdiary_user_menu.tpl" }
 
-{* Context menu for Skills *}
-<ul id="SkillsMenu" class="contextMenu">
-    <li class="delete"><a href="#remove">Remove Skill</a></li>
-    <li class="rate"><a href="#rate">Rate Skill</a></li>
-    <li class="proscons"><a href="#proscons">Evaluate Pros/Cons</a></li>
-</ul>
-
 {* Pop-up form for pre/post skill use *}
 <div id="PrePostForm" title="Distress Tolerance Evaluation">
     <p class="validateTips">

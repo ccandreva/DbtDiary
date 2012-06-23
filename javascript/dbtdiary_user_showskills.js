@@ -13,7 +13,7 @@
     /* Some Globals
      */
 
-    var Before, After, EditID, First=true;  // The ID we are editing in the modal dialog.
+    var Before, After, EditID;  // The ID we are editing in the modal dialog.
     var AjaxPhp=Zikula.Config.baseURL + 'ajax.php';
     // skill51 is Pros and Cons
 
@@ -77,12 +77,11 @@
 
     });
     
-    function SkillMenuCallback(action, el, pos) {
-
+    function SkillMenuCallback(action, opt) {
         // Get the ID of whatever we are working on.
-        // Save in a global so callbacks can use it.
-        EditID = $(el).parent().attr('id');
-        var name = $(el).parent().attr('name');
+        // Save in a global so Ajax callbacks can use it.
+        EditID = opt.$trigger.parent().attr('id');
+        var name = opt.$trigger.parent().attr('name');
         
 	switch (action)
 	{
@@ -123,28 +122,29 @@
     }
 
     function HookEditDelete() {
-        if (First) {
-            $('ul#SkillsMenu').clone().attr('id', 'DistressMenu').insertAfter('ul#SkillsMenu');
-            $('ul#SkillsMenu').clone().attr('id', 'ProsConsMenu').insertAfter('ul#SkillsMenu');
-            First = false;
-        }
-	$("img.EditSkill").contextMenu({
-	    menu: 'SkillsMenu',
-	    Button: 0
-	}, SkillMenuCallback);
+	$.contextMenu({
+            'selector': "img.EditSkill",
+            'trigger': 'hover',
+	    'items':  {
+                "remove": {name: "Remove Skill",
+                    /* callback: "removeHandler",*/ 
+                    icon: 'delete'},
+                "rate": {name: "Rate Skill", 
+                    /*callback: "rateHandler",*/ 
+                    "disabled": function(key, opt) { return !opt.$trigger.hasClass('EditDistress');},
+                    icon: 'rate'},
+                "proscons": {name: "Evaluate Pros/Cons", 
+                    /*callback: "prosconsHandler",*/ 
+                    "disabled": function(key, opt) { return !opt.$trigger.hasClass('EditProsCons');},
+                    icon: 'proscons'}
+                },
+            'events': {
+                'show': showMenuHandler,
+                'hide': hideMenuHandler
+                },
+             'callback': SkillMenuCallback
+	});
 
-        $("img.EditDistress").contextMenu({
-	    menu: 'DistressMenu',
-	    Button: 0
-	}, SkillMenuCallback);
-        $('ul#DistressMenu').disableContextMenuItems('#proscons');
-        
-	$("img.EditProsCons").contextMenu({
-	    menu: 'ProsConsMenu',
-	    Button: 0
-	}, SkillMenuCallback);
-        $('ul#SkillsMenu').disableContextMenuItems('#rate,#proscons');
-  
         $('#SkillsUsedTable th')
             .ajaxStart(function() {
                 $(this).addClass('AjaxLoading');
@@ -154,7 +154,12 @@
             });
         
     }
-
+    function showMenuHandler(opt) {
+        opt.$trigger.removeClass('r90');
+    }
+    function hideMenuHandler(opt) {
+        opt.$trigger.addClass('r90');
+    }
     // Handler functions go here.
     function skillHandler() {
         $.getJSON(AjaxPhp, {
