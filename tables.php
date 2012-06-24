@@ -203,12 +203,47 @@ function DbtDiary_tables()
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'uid'       => 'I UNSIGNED NOTNULL',
     'date'      => 'D NOTNULL',
-    'goal'      => 'C(255)',
-    'steps'     => 'C(255)',
-    'signs'     => 'C(255)',
-    'steps2'    => 'C(255)',
-    'signs2'    => 'C(255)',
+    'goal'      => 'X',
+    'steps'     => 'X',
+    'signs'     => 'X',
+    'steps2'    => 'X',
+    'signs2'    => 'X',
       );
+
+  /* 
+   * Overall treatment goals
+   */
+  $tables['dbtdiary_goals'] = 'dbtdiary_goals';
+  $tables['dbtdiary_goals_column'] = array(
+    'id'	=> 'id',
+    'originid'  => 'originid',
+    'previousid' => 'previousid',
+    'uid'      => 'uid',
+    'goal'      => 'goal',
+    'motivators' => 'motivators',
+    'barriers'  => 'barriers',
+    'steps'     => 'steps',
+    'signs'     => 'signs',
+    'replaced'  => 'replaced',
+    'done'      => 'done',
+    );
+  $tables['dbtdiary_goals_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'originid'     => 'I UNSIGNED NOTNULL',
+    'previousid'     => 'I UNSIGNED NOTNULL',
+    'uid'     => 'I UNSIGNED NOTNULL',
+    'goal'  =>  'X',
+    'motivators'  => 'X',
+    'barriers'  =>  'X',
+    'steps'     => 'X',
+    'signs'     => 'X',
+    'replaced'  =>  'L NOTNULL',
+    'done'      => 'L NULL'
+      );
+  ObjectUtil::addStandardFieldsToTableDefinition (
+          $tables['dbtdiary_goals_column'], '');
+  ObjectUtil::addStandardFieldsToTableDataDefinition(
+          $tables['dbtdiary_goals_column_def']);
 
 /* urges table, not using yet.
   $tables['dbtdiary_urges'] = 'dbtdiary_urges';
