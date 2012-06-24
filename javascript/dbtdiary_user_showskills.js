@@ -19,11 +19,14 @@
 
     // Initializers, to be run on document ready.
     $(document).ready(function() {
-        Before = $('#before');
-        After = $('#after');
+        // Activate tabs for Skills list
         $("#AllSkills").tabs();
-        skillHide(initialSkills);
-        $("li.skills").click(skillHandler);
+        skillHide(initialSkills);  // Hide the skills already selected
+
+        // Add skills when clicked on
+        $("li.skills").click(AddSkillHandler);
+        
+        // Setup the Pre/Post skill form
         $("#PrePostForm").dialog({
             autoOpen: false,
             height: 350,
@@ -42,6 +45,8 @@
                     //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
+        
+        // Activate the Pros/Cons form
         $("#ProsConsForm").dialog({
             autoOpen: false,
             height: 480,
@@ -61,7 +66,10 @@
             }
         });
 
-        HookEditDelete();
+        HookMenuButton();
+        // Get the DOM objects for the Before/After skill form fields
+        Before = $('#before');
+        After = $('#after');
         
         // Return AJAX token in headers
         if (Zikula.Config.sessionName) {
@@ -77,72 +85,30 @@
 
     });
     
-    function SkillMenuCallback(action, opt) {
-        // Get the ID of whatever we are working on.
-        // Save in a global so Ajax callbacks can use it.
-        EditID = opt.$trigger.parent().attr('id');
-        var name = opt.$trigger.parent().attr('name');
-        
-	switch (action)
-	{
-	    case 'remove':
-		$.getJSON(AjaxPhp,{
-		    module: 'DbtDiary', func: 'removeskill',
-		    date: date,
-		    skillused: EditID
-		}, RemoveSkillCallback);
-		break;
-
-	    case 'rate':
-                var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
-                if (nums) {
-                    Before.val(nums[1]);
-                    After.val(nums[2]);
-                } else {
-                    Before.val('');
-                    After.val('');
-                }
-                $( '#PrePostForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
-                $( '#PrePostForm' ).dialog( "open" );
-		break;
-                
-            case 'proscons':
-                // Load the pros/cons information via ajax,
-                // Launch form when the data comes back.
-                $.getJSON(AjaxPhp,{
-                    module: 'DbtDiary', func: 'loadProsCons',
-                    id: EditID
-                    }, ProsConsHandlerCallback);
-                break;
-	    
-            default:
-                alert('Invalid action: ' + action);
-                
-	}
-    }
-
-    function HookEditDelete() {
+    /*
+     * Hook the menu activation button
+     */
+    function HookMenuButton() {
 	$.contextMenu({
             'selector': "img.EditSkill",
             'trigger': 'hover',
 	    'items':  {
                 "remove": {name: "Remove Skill",
-                    /* callback: "removeHandler",*/ 
+                    callback: RemoveSkillHandler,
                     icon: 'delete'},
                 "rate": {name: "Rate Skill", 
-                    /*callback: "rateHandler",*/ 
+                    "callback": EditSkillHandler, 
                     "disabled": function(key, opt) { return !opt.$trigger.hasClass('EditDistress');},
                     icon: 'rate'},
                 "proscons": {name: "Evaluate Pros/Cons", 
-                    /*callback: "prosconsHandler",*/ 
+                    callback: ProsConsHandler, 
                     "disabled": function(key, opt) { return !opt.$trigger.hasClass('EditProsCons');},
                     icon: 'proscons'}
                 },
             'events': {
-                'show': showMenuHandler,
-                'hide': hideMenuHandler
-                },
-             'callback': SkillMenuCallback
+                'show': function(opt) {opt.$trigger.removeClass('r90'); },
+                'hide': function(opt) {opt.$trigger.addClass('r90'); }
+                }
 	});
 
         $('#SkillsUsedTable th')
@@ -154,41 +120,58 @@
             });
         
     }
-    function showMenuHandler(opt) {
-        opt.$trigger.removeClass('r90');
-    }
-    function hideMenuHandler(opt) {
-        opt.$trigger.addClass('r90');
-    }
-    // Handler functions go here.
-    function skillHandler() {
+
+// Handler functions go here.
+    function AddSkillHandler() {
         $.getJSON(AjaxPhp, {
             module: 'DbtDiary', func: 'addskill',
             date: date,
             skill: $(this).attr('id')
         }, skillCallback);
     }
-    
+
+function RemoveSkillHandler(action, opt) {
+        $.getJSON(AjaxPhp,{
+            module: 'DbtDiary', func: 'removeskill',
+            date: date,
+            skillused: opt.$trigger.parent().attr('id')
+        }, RemoveSkillCallback);
+    }
+    function RemoveSkillCallback(data){
+        $('#SkillsUsed').html(data.data.output);
+        if (data.data) $('#'+data.data.id).show('slow');
+        HookMenuButton();
+    }
+
+    function EditSkillHandler() {
+        EditID=$(this).parent().attr('id');
+        var name=$(this).parent().attr('name');
+        var nums = $( '#' + EditID ).find('span').text().match(/^\((\d+)\/(\d+)/);
+        if (nums) {
+            Before.val(nums[1]);
+            After.val(nums[2]);
+        } else {
+            Before.val('');
+            After.val('');
+        }
+        $( '#PrePostForm' ).dialog( "option", "title", 'Rate Skill: ' + name );
+        $( '#PrePostForm' ).dialog( "open" );
+    }
+
+
     function skillCallback(data){
 	if (data.data) {
 	    $('#SkillsUsed').html(data.data.output);
 	    $('#'+data.data.id).hide('slow');
             $('p#message').text(data.data.message);
 	}
-        HookEditDelete();
+        HookMenuButton();
     }
     
     function skillHide(skills){
         for (var i in skills) {
             $('#skill' + skills[i]).hide();
         }
-    }
-
-    function RemoveSkillCallback(data){
-        //$('img#skillWaiting').hide();
-        $('#SkillsUsed').html(data.data.output);
-        if (data.data) $('#'+data.data.id).show('slow');
-        HookEditDelete();
     }
 
     function RateSkillHandler() {
@@ -209,9 +192,8 @@
         }
     }
 
-    function ProsConsHandler() {
-        EditID=$(this).parent().attr('id');
-        var name=$(this).parent().attr('name');
+    function ProsConsHandler(action, opt) {
+        EditID=opt.$trigger.parent().attr('id');
 	$.getJSON(AjaxPhp,{
 	    module: 'DbtDiary', func: 'loadProsCons',
 	    id: EditID
@@ -219,11 +201,13 @@
     }
 
     function ProsConsHandlerCallback(obj) {
-	$('#behavior').val(obj.data.behavior);
-	$('#tolerate_pros').val(obj.data.tolerate_pros);
-	$('#tolerate_cons').val(obj.data.tolerate_cons);
-	$('#nottolerate_pros').val(obj.data.nottolerate_pros);
-	$('#nottolerate_cons').val(obj.data.nottolerate_cons);
+        if (obj.data) {
+            $('#behavior').val(obj.data.behavior);
+            $('#tolerate_pros').val(obj.data.tolerate_pros);
+            $('#tolerate_cons').val(obj.data.tolerate_cons);
+            $('#nottolerate_pros').val(obj.data.nottolerate_pros);
+            $('#nottolerate_cons').val(obj.data.nottolerate_cons);
+        }
         $( '#ProsConsForm' ).dialog( "open" );
     }
 
