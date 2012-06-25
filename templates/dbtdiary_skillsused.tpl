@@ -45,7 +45,9 @@
                 {/if}
                 {assign var=i value=$i+$n}
             {/section}
-        </tr>                
+        </tr>      
+    {sectionelse}
+        <tr><td><em>{gt text="No skills have been selected yet."}</em></td></tr>
     {/section}
 </table>
 {/nocache}
