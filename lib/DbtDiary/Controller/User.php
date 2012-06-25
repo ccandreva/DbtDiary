@@ -171,4 +171,36 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $this->view->assign('skills', DbtDiary_Util::getSkillsUsed($uid, $date));
         return $this->view->fetch('dbtdiary_user_showskills.tpl');
     }
+    
+    public function ShowGoals()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+        
+        $this->view->assign('templatetitle', 'DbtDiary :: Goals');
+        //$where = "uid=$uid and replaced=0";
+        $where = "uid=$uid and replaced is null";
+        $goals = DBUtil::selectObjectArray('dbtdiary_goals', $where);
+        $this->view->assign('goals', $goals);
+        return $this->view->fetch('dbtdiary_user_showgoals.tpl');
+    }
+
+    public function EditGoal()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+        
+        $id = FormUtil :: getPassedValue('id');
+        $view = FormUtil::newForm('DbtDiary', $this);
+        $view->assign('templatetitle', 'DbtDiary :: Goals');
+
+        $tmplfile = 'dbtdiary_user_editgoal.tpl';
+        $args = array('uid' => $uid);
+        if ($id) $args['id'] = $id;
+        $formobj = new DbtDiary_Form_Handler_EditGoal($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+        
+    }
+    
 }
