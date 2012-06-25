@@ -83,7 +83,7 @@ class DbtDiary_Util
     {
         $w = date('w') - 1;
         if ($w < 0) $w = 7;
-        $start = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d')-$w+1, date('Y')));
+        $start = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d')-$w, date('Y')));
         $end = date('Y-m-d', strtotime("+6 days", strtotime($start)));
     }
     
