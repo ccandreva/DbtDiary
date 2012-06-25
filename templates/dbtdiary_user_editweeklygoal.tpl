@@ -32,7 +32,11 @@
         </div>
 
     </fieldset>
+    <div class="z-buttons z-formbuttons">
+        {formbutton class='z-bt-ok' commandName='create' __text='Save'}
+        {* formbutton class='z-bt-cancel' commandName='cancel' __text='Cancel' *}
+        <a href="{modurl modname='DbtDiary' type='user' func='main'}" title="{gt text="Cancel"}">{img modname=core src=button_cancel.png set=icons/extrasmall __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
+    </div>
 
-{formbutton commandName="submit" __text="Submit" }
 {/form}
 {/nocache}
