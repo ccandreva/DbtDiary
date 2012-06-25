@@ -92,8 +92,9 @@
 </div>
 
 <p class="z-formnote z-informationmsg">
-    Select skills that you used today by clicking on the in the window below. 
-    Click on a DBT module name to show the skills in that module.
+    {gt text="Select skills that you used today 
+    by clicking on the skill in the window below. 
+    Click on a DBT module name to show the skills in that module."}
 </p>
 <div id="AllSkills">
     <ul>{foreach item="module" from=$modules}<li><a href="#{$module.name|strip:''}">{$module.name}</a></li>{/foreach}</ul>
