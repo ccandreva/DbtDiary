@@ -245,6 +245,42 @@ function DbtDiary_tables()
   ObjectUtil::addStandardFieldsToTableDataDefinition(
           $tables['dbtdiary_goals_column_def']);
 
+  $tables['dbtdiary_minigoals'] = 'dbtdiary_minigoals';
+  $tables['dbtdiary_minigoals_column'] = array(
+    'id'	=> 'id',
+    'uid'      => 'uid',
+    'goal'      => 'goal',
+    'motivators' => 'motivators',
+    'barriers'  => 'barriers',
+    );
+  $tables['dbtdiary_minigoals_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'     => 'I UNSIGNED NOTNULL',
+    'goal'  =>  'C(255)',
+    'motivators'  => 'C(255)',
+    'barriers'  =>  'C(255)',
+      );
+  ObjectUtil::addStandardFieldsToTableDefinition (
+          $tables['dbtdiary_minigoals_column'], '');
+  ObjectUtil::addStandardFieldsToTableDataDefinition(
+          $tables['dbtdiary_minigoals_column_def']);
+
+  $tables['dbtdiary_minigoaldt'] = 'dbtdiary_minigoaldt';
+  $tables['dbtdiary_minigoaldt_column'] = array(
+    'id'	=> 'id',
+    'uid'	=> 'uid',
+    'date'      => 'date',
+    'minigoal'	=> 'minigoal',
+    'done'      => 'done',
+    );
+  $tables['dbtdiary_minigoaldt_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'	=> 'I UNSIGNED',
+    'date'    => 'D NOTNULL',
+    'minigoal'	=> 'I UNSIGNED',
+    'done'      => 'L NULL'
+    );
+
 /* urges table, not using yet.
   $tables['dbtdiary_urges'] = 'dbtdiary_urges';
   $tables['dbtdiary_urges_column'] = array(

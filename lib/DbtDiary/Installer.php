@@ -33,6 +33,14 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
         if ( !DBUtil::createTable('dbtdiary_goals') ) return false;
         DBUtil::createIndex('UidDate', 'dbtdiary_goals', 
                 array('uid', 'cr_date'));
+        if ( !DBUtil::createTable('dbtdiary_minigoals') ) return false;
+        DBUtil::createIndex('UidGoal', 'dbtdiary_minigoals', 
+                array('uid', 'goal'));
+        if ( !DBUtil::createTable('dbtdiary_minigoaldt') ) return false;
+        DBUtil::createIndex('GoalDate', 'dbtdiary_minigoaldt', 
+                array('minigoal', 'date'));
+        DBUtil::createIndex('DateGoal', 'dbtdiary_minigoaldt', 
+                array('date', 'minigoal'));
 
         return true;
     }
@@ -72,6 +80,16 @@ class DbtDiary_Installer extends Zikula_AbstractInstaller
                 if (!DBUtil::createTable('dbtdiary_goals')) return false;
                 DBUtil::createIndex('UidDate', 'dbtdiary_goals', 
                 array('uid', 'cr_date'));
+                
+            case "0.0.14" :
+                if ( !DBUtil::createTable('dbtdiary_minigoals') ) return false;
+                DBUtil::createIndex('UidGoal', 'dbtdiary_minigoals', 
+                        array('uid', 'minigoal'));
+                if ( !DBUtil::createTable('dbtdiary_minigoaldt') ) return false;
+                DBUtil::createIndex('GoalDate', 'dbtdiary_minigoaldt', 
+                        array('minigoal', 'date'));
+                DBUtil::createIndex('DateGoal', 'dbtdiary_minigoaldt', 
+                        array('date', 'minigoal'));
 
              // This break should be after the last upgrade
                 break;
