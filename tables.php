@@ -249,14 +249,14 @@ function DbtDiary_tables()
   $tables['dbtdiary_minigoals_column'] = array(
     'id'	=> 'id',
     'uid'      => 'uid',
-    'goal'      => 'goal',
+    'name'      => 'name',
     'motivators' => 'motivators',
     'barriers'  => 'barriers',
     );
   $tables['dbtdiary_minigoals_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'uid'     => 'I UNSIGNED NOTNULL',
-    'goal'  =>  'C(255)',
+    'name'  =>  'C(255)',
     'motivators'  => 'C(255)',
     'barriers'  =>  'C(255)',
       );
