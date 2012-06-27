@@ -24,6 +24,8 @@ class DbtDiary_Api_User extends Zikula_AbstractApi
                   text=>$this->__('Overview'), 'class' => 'z-icon-es-preview'),  
               array('url' => ModUtil::url('DbtDiary', 'user', 'viewdiary'),
                   text=>$this->__('View Diary'), 'class' => 'z-icon-es-view'),  
+              array('url' => ModUtil::url('DbtDiary', 'user', 'showminigoals'),
+                  text=>$this->__('Minigoals'), 'class' => 'z-icon-es-profile'),
               array('url' => ModUtil::url('DbtDiary', 'user', 'showgoals'),
                   text=>$this->__('Treatment Plan Goals'), 'class' => 'z-icon-es-profile'),
             );

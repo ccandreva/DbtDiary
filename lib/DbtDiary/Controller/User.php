@@ -203,4 +203,34 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         
     }
     
+    public function ShowMiniGoals()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+        
+        $this->view->assign('templatetitle', 'DbtDiary :: MiniGoals');
+        $where = "uid=$uid and finished=false";
+        $goals = DBUtil::selectObjectArray('dbtdiary_minigoals', $where);
+        $this->view->assign('minigoals', $goals);
+        return $this->view->fetch('dbtdiary_user_showminigoals.tpl');
+    }
+
+    public function EditMiniGoal()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+        
+        $id = FormUtil :: getPassedValue('id');
+        $view = FormUtil::newForm('DbtDiary', $this);
+        $view->assign('templatetitle', 'DbtDiary :: MiniGoals');
+
+        $tmplfile = 'dbtdiary_user_editminigoal.tpl';
+        $args = array('uid' => $uid);
+        if ($id) $args['id'] = $id;
+        $formobj = new DbtDiary_Form_Handler_EditMiniGoal($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+        
+    }
+    
 }

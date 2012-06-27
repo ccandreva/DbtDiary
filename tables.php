@@ -249,16 +249,18 @@ function DbtDiary_tables()
   $tables['dbtdiary_minigoals_column'] = array(
     'id'	=> 'id',
     'uid'      => 'uid',
-    'name'      => 'name',
+    'goal'      => 'goal',
     'motivators' => 'motivators',
     'barriers'  => 'barriers',
+    'finished'      => 'finished',
     );
   $tables['dbtdiary_minigoals_column_def'] = array(
     'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
     'uid'     => 'I UNSIGNED NOTNULL',
-    'name'  =>  'C(255)',
+    'goal'  =>  'C(255)',
     'motivators'  => 'C(255)',
     'barriers'  =>  'C(255)',
+    'finished'      => 'L NULL'
       );
   ObjectUtil::addStandardFieldsToTableDefinition (
           $tables['dbtdiary_minigoals_column'], '');
