@@ -211,7 +211,13 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $this->view->assign('templatetitle', 'DbtDiary :: MiniGoals');
         $where = "uid=$uid and finished=false";
         $goals = DBUtil::selectObjectArray('dbtdiary_minigoals', $where);
+        foreach ($goals as &$goal) {
+            $where = 'minigoal=' . $goal['id'];
+            $obj = DBUtil::selectObjectArray('dbtdiary_minigoaldt', $where, '', -1,14, 'date', null, null, array('date', 'done'));
+            $goal['used'] = $obj;
+        }
         $this->view->assign('minigoals', $goals);
+        $this->view->assign('debug', print_r($goals, true));
         return $this->view->fetch('dbtdiary_user_showminigoals.tpl');
     }
 

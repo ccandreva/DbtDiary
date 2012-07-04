@@ -15,7 +15,7 @@
 <p><a href="{modurl modname="dbtdiary" func="editminigoal"}">Add Mini-goal.</a></p>
 <ol>
 {foreach item=goal from=$minigoals}
-    <li> <a href="{modurl modname="dbtdiary" func="editgoal" id=$goal.id}">{$editIcon.imgtag}</a>
+    <li> <a href="{modurl modname="dbtdiary" func="editminigoal" id=$goal.id}">{$editIcon.imgtag}</a>
             {$goal.goal}
             <ul>
                 {if $goal.motivators}
@@ -32,4 +32,8 @@
     </li>
 {/foreach}
 </ol>
-    
+
+<h4>Debug info - please ignore</h4>
+<pre>
+{$debug}
+</pre>
