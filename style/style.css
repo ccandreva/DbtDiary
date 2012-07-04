@@ -104,9 +104,15 @@ td.skillsused img{
     vertical-align: middle;
     padding: 1px;
 }
+td.skillsused img:hover{
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+}
 .r90 {
     transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
+    opacity: 0.6;
+    filter: alpha(opacity=60);
 }
 th#skillshead
 {

@@ -91,7 +91,7 @@
     function HookMenuButton() {
 	$.contextMenu({
             'selector': "img.EditSkill",
-            'trigger': 'hover',
+            'trigger': 'left',
 	    'items':  {
                 "remove": {name: "Remove Skill",
                     callback: RemoveSkillHandler,
