@@ -79,6 +79,22 @@
                         date=$week.weeklygoal[0].date}">{$editIcon.imgtag}</a>
                 </td>
             </tr>
+            {foreach item=minigoal from=$week.minigoals}
+                <tr>
+                    <th>{$minigoal.goal|truncate:15}</th>
+                    {foreach item=date from=$week.dates}
+                        <td>
+                            {if $minigoal.used.$date.done}
+                                {$Done.imgtag}{else}{$ToDo.imgtag}
+                            {/if}
+                            {if $date <= $today}
+                                <a href="{modurl modname="dbtdiary" func="EditMiniGoalDt" id=$minigoal.used.$date.id minigoal=$minigoal.id date=$date}">{$editIcon.imgtag}</a>
+                            {/if}
+                        </td>
+                    {/foreach}
+                </tr>
+            {/foreach}
+                
         </tbody>
     </table>
 

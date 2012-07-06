@@ -31,14 +31,19 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $skillsObj = DBUtil::selectObjectArray ('dbtdiary_skillsused', $where,
             '',-1, -1, 'date', null, null, array('id', 'date'), 'y');
 
+        $goals = ModUtil::apiFunc('dbtdiary', 'user', 'loadMinigoals',
+                array('uid' => $uid));
+
         $weeks = array();
         $t1 = strtotime($start);
         $t2 = $t1 - (86400 * 7);
         foreach ( array($t1, $t2) as $t) {
             $data = array();
+            $dates = array();
             $weekstart = $t;
             for ($i = 1; $i<=7; $i++) {
                 $date = date('Y-m-d', $t);
+                $dates[] = $date;
                 $dateSQL = "$date 00:00:00";
                 $t+=86400; // add 24 hours
                 $data[$date]['date'] = $date;
@@ -52,6 +57,8 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
                 '',-1, -1, '', null, null, array('id','date'));
             $weeks[] = array('start' => date('M d', $weekstart), 
                 'weeklygoal' => $weeklygoalsObj,
+                'dates' =>  $dates,
+                'minigoals' => $goals,
                 'data' => $data );
         }
 
@@ -209,13 +216,8 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         if ($ret) return $ret;
         
         $this->view->assign('templatetitle', 'DbtDiary :: MiniGoals');
-        $where = "uid=$uid and finished=false";
-        $goals = DBUtil::selectObjectArray('dbtdiary_minigoals', $where);
-        foreach ($goals as &$goal) {
-            $where = 'minigoal=' . $goal['id'];
-            $obj = DBUtil::selectObjectArray('dbtdiary_minigoaldt', $where, '', -1,14, 'date', null, null, array('date', 'done'));
-            $goal['used'] = $obj;
-        }
+        $goals = ModUtil::apiFunc('dbtdiary', 'user', 'loadMinigoals',
+                array('uid' => $uid));
         $this->view->assign('minigoals', $goals);
         $this->view->assign('debug', print_r($goals, true));
         return $this->view->fetch('dbtdiary_user_showminigoals.tpl');
@@ -238,5 +240,25 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         return $output;
         
     }
-    
+
+        public function EditMiniGoalDt()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
+        if ($ret) return $ret;
+        
+        $id = FormUtil :: getPassedValue('id');
+        $date = FormUtil :: getPassedValue('date');
+        $minigoal = FormUtil :: getPassedValue('minigoal');
+        $view = FormUtil::newForm('DbtDiary', $this);
+        $view->assign('templatetitle', 'DbtDiary :: MiniGoals');
+
+        $tmplfile = 'dbtdiary_user_editminigoaldt.tpl';
+        $args = array('uid' => $uid, 'minigoal' => $minigoal, 'date' => $date);
+        if ($id) $args['id'] = $id;
+        $formobj = new DbtDiary_Form_Handler_EditMiniGoalDt($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+        
+    }
+
 }

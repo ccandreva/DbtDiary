@@ -32,8 +32,3 @@
     </li>
 {/foreach}
 </ol>
-
-<h4>Debug info - please ignore</h4>
-<pre>
-{$debug}
-</pre>
