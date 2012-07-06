@@ -19,7 +19,8 @@
 <table id="SkillsUsedTable">
     <tr>
         <th colspan="5">
-        These are the skills you used today. To remove one, simply click on it.
+        These are the skills you used today. Click the triangle next to a
+        skill to show options.
         </th>
     </tr>
         
