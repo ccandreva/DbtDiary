@@ -32,5 +32,27 @@ class DbtDiary_Api_User extends Zikula_AbstractApi
         }        
         return $links;
     }
+    
+    public function loadMinigoals($args)
+    {
+        if (isset($args['uid'])) {
+            $uid = $args['uid'];
+        } else {
+            return false;
+        }
+        $whereDate = isset($args['startDate']) ? ' and date>=' . $args['startDate'] : '';
+        $limitNumRows = $args['limitNumRows'] ?: 14;
+        $where = "uid=$uid and finished=false";
+        $goals = DBUtil::selectObjectArray('dbtdiary_minigoals', $where);
+        foreach ($goals as &$goal) {
+            $where = 'minigoal=' . $goal['id'] . $whereDate;
+            $obj = DBUtil::selectObjectArray('dbtdiary_minigoaldt', $where, '', 
+                    -1, $limitNumRows, 'date', null, null, array('date', 'done'));
+            $goal['used'] = $obj;
+        }
+        
+        return $goals;
+
+    }
 
 }
