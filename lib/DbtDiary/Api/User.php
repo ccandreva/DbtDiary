@@ -47,7 +47,7 @@ class DbtDiary_Api_User extends Zikula_AbstractApi
         foreach ($goals as &$goal) {
             $where = 'minigoal=' . $goal['id'] . $whereDate;
             $obj = DBUtil::selectObjectArray('dbtdiary_minigoaldt', $where, '', 
-                    -1, $limitNumRows, 'date', null, null, array('date', 'done'));
+                    -1, $limitNumRows, 'date', null, null, array('id', 'date', 'done'));
             $goal['used'] = $obj;
         }
         
