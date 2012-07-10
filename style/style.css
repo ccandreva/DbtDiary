@@ -63,8 +63,19 @@ li.skills
 {
     padding: 0;
     /* margin: 0; */
-    /* list-style-image: url('../../../images/icons/extrasmall/edit_add.png'); */
     line-height: 1.5em;
+}
+div#Mindfulness li{
+    list-style-image: url("../images/Dharma_Wheel.png");
+}
+div#InterpersonalEffectiveness li{
+    list-style-image: url('../../../images/icons/extrasmall/agt_family.png');
+}
+div#EmotionRegulation li{
+    list-style-image: url('../../../images/icons/extrasmall/filter.png');
+}
+div#DistressTolerance li{
+    list-style-image: url('../../../images/icons/extrasmall/help.png');
 }
 li.skills a
 {
@@ -89,7 +100,7 @@ div#EmotionRegulation div.skills.PLEASEMaster
 {
     width: 15em;
 }
-div#Mindfullness div.skills
+div#Mindfulness div.skills
 {
     width: 12em;
 }
