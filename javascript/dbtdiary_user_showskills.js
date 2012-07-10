@@ -24,7 +24,7 @@
         skillHide(initialSkills);  // Hide the skills already selected
 
         // Add skills when clicked on
-        $("li.skills").click(AddSkillHandler);
+        $("li.skills img").click(AddSkillHandler);
         
         // Setup the Pre/Post skill form
         $("#PrePostForm").dialog({
@@ -126,7 +126,7 @@
         $.getJSON(AjaxPhp, {
             module: 'DbtDiary', func: 'addskill',
             date: date,
-            skill: $(this).attr('id')
+            skill: $(this).parent().attr('id')
         }, skillCallback);
     }
 

@@ -20,6 +20,8 @@
     {* var csrftoken="{insert name='csrftoken'}"; *}
 {literal}
 </script>
+{img modname='core' src='/up.png' set='icons/extrasmall' 
+    alt='I used this skill today.' class="AddSkill" assign='addIcon'}
 
 { include file="dbtdiary_user_menu.tpl" }
 
@@ -93,8 +95,7 @@
 
 <p class="z-formnote z-informationmsg">
     {gt text="Select skills that you used today 
-    by clicking on the skill in the window below. 
-    Click on a DBT module name to show the skills in that module."}
+    by clicking on the arrow icon in the lists below."}
 </p>
 <div id="AllSkills">
     <ul>{foreach item="module" from=$modules}<li><a href="#{$module.name|strip:''}">{$module.name}</a></li>{/foreach}</ul>
@@ -105,7 +106,10 @@
                     <h4 class="skills">{$head.name}</h4>
                     <ul>
                     {foreach item=skill from=$head.skills}
-                        <li class="skills" id="skill{$skill.id}">{$skill.htname}</li>
+                        <li class="skills" id="skill{$skill.id}">
+                            <a href="{modurl modname="Wikula" func="show" tag=$skill.name|strip:'_'}">{$skill.htname}</a>
+                            {$addIcon.imgtag}
+                        </li>
                     {/foreach}
                     </ul>
                 </div>
