@@ -65,17 +65,22 @@ li.skills
     /* margin: 0; */
     line-height: 1.5em;
 }
-div#Mindfulness li{
-    list-style-image: url("../images/Dharma_Wheel.png");
+
+ul#SkillsTabsMenu a{
+    padding-left: 35px;
+    /* margin-left: 10px; */
 }
-div#InterpersonalEffectiveness li{
-    list-style-image: url('../../../images/icons/extrasmall/agt_family.png');
+li#TabMindfulness a{
+    background: url("../images/Dharma_Wheel.png") 10px center no-repeat;
 }
-div#EmotionRegulation li{
-    list-style-image: url('../../../images/icons/extrasmall/filter.png');
+li#TabInterpersonalEffectiveness a{
+    background: url('../../../images/icons/extrasmall/agt_family.png') 10px center no-repeat;
 }
-div#DistressTolerance li{
-    list-style-image: url('../../../images/icons/extrasmall/help.png');
+li#TabEmotionRegulation a{
+    background: url('../../../images/icons/extrasmall/filter.png') 10px center no-repeat;
+}
+li#TabDistressTolerance a{
+    background: url('../../../images/icons/extrasmall/help.png') 10px center no-repeat;
 }
 li.skills a
 {

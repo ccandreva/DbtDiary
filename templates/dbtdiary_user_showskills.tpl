@@ -98,7 +98,14 @@
     by clicking on the arrow icon in the lists below."}
 </p>
 <div id="AllSkills">
-    <ul>{foreach item="module" from=$modules}<li><a href="#{$module.name|strip:''}">{$module.name}</a></li>{/foreach}</ul>
+    <ul id="SkillsTabsMenu">
+        {foreach item="module" from=$modules}
+            {assign var=modname value=$module.name|strip:''}
+            <li id="Tab{$modname}">
+                <a href="#{$modname}">{$module.name}</a>
+            </li>
+            {/foreach}
+    </ul>
     {foreach item=module from=$modules}
         <div id="{$module.name|strip:''}">
             {foreach item=head from=$module.headings}
