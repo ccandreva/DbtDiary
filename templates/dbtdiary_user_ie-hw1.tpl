@@ -2,9 +2,26 @@
 
 { include file="dbtdiary_user_menu.tpl" }
 
-<h3>{gt text="Interpersonal Effectiveness Worksheet "}{*$date|date_format:'%b %e, %Y'*}</h3>
+<h3>{gt text="Goals and Priorities in Interpersonal Situations"}{*$date|date_format:'%b %e, %Y'*}</h3>
 
 {insert name='getstatusmsg' module='DbtDiary'}
+
+<p>
+    Use this sheet to figure out your goals and priorities in any situation that
+    creates a problem for you, such as ones where:
+</p>
+<ol>
+    <li>Your rights or wishes are not being respected. </li>
+    <li>You want someone to do, change, or give you something.</li>
+    <li>You want or neet to say no or resist pressure to do something.</li>
+    <li>You want to get your position or point of view taken seriously</li>
+    <li>There is conflict with another person.<li>
+</ol>
+    
+<p>
+    Observe and describe in writing as clost in time to the situation as possible.
+</p>
+    
 
 {nocache}
 {form cssClass="z-form"}
