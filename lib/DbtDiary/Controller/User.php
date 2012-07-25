@@ -58,7 +58,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
             $weeks[] = array('start' => date('M d', $weekstart), 
                 'weeklygoal' => $weeklygoalsObj,
                 'dates' =>  $dates,
-                'minigoals' => $goals,
+                // 'minigoals' => $goals,
                 'data' => $data );
         }
 
@@ -66,6 +66,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $this->view->assign('end', $end);
         $this->view->assign('today', $today);
         $this->view->assign('weeks', $weeks);
+        $this->view->assign('minigoals', $goals);
         $this->view->assign('templatetitle', 'DbtDiary');
         return $this->view->fetch('dbtdiary_user_main.tpl');
     }

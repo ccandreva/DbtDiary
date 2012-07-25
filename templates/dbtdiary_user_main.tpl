@@ -79,7 +79,7 @@
                         date=$week.weeklygoal[0].date}">{$editIcon.imgtag}</a>
                 </td>
             </tr>
-            {foreach item=minigoal from=$week.minigoals}
+            {foreach item=minigoal from=$minigoals}
                 <tr>
                     <th>{$minigoal.goal|truncate:15}</th>
                     {foreach item=date from=$week.dates}
