@@ -242,7 +242,7 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         
     }
 
-        public function EditMiniGoalDt()
+    public function EditMiniGoalDt()
     {
         $ret = DbtDiary_Util::checkuser($uid, ACCESS_OVERVIEW);
         if ($ret) return $ret;
@@ -257,6 +257,25 @@ class DbtDiary_Controller_User extends Zikula_AbstractController
         $args = array('uid' => $uid, 'minigoal' => $minigoal, 'date' => $date);
         if ($id) $args['id'] = $id;
         $formobj = new DbtDiary_Form_Handler_EditMiniGoalDt($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+        
+    }
+
+    public function EditWorksheetGP()
+    {
+        $ret = DbtDiary_Util::checkuser($uid, ACCESS_EDIT);
+        if ($ret) return $ret;
+        
+        $id = FormUtil :: getPassedValue('id');
+        $date = FormUtil :: getPassedValue('date');
+        $view = FormUtil::newForm('DbtDiary', $this);
+        $view->assign('templatetitle', 'DbtDiary :: Goals & Priorities Worksheet');
+
+        $tmplfile = 'dbtdiary_user_editworksheetgp.tpl';
+        $args = array('uid' => $uid, 'date' => $date);
+        if ($id) $args['id'] = $id;
+        $formobj = new DbtDiary_Form_Handler_EditWorksheetGP($args);
         $output = $view->execute($tmplfile, $formobj);
         return $output;
         

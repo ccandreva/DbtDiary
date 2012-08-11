@@ -162,6 +162,23 @@ img#skillWaiting
     background: transparent url('../../../images/ajax/icon_animated_busy.gif') no-repeat center right;
 }
 
+ul#WantsDesires
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul#WantsDesires li
+{
+    padding-left: 30px;
+    background: url('../../../images/icons/extrasmall/move.png') no-repeat left center;
+}
+ul#WantsDesires li.ui-state-highlight{
+    height: 70px;
+    background: lightblue;
+    border: 1px solid black;
+}
+
 #PrePostForm label{
     width: 20em;
 }
