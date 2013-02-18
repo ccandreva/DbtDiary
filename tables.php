@@ -283,6 +283,31 @@ function DbtDiary_tables()
     'done'      => 'L NULL'
     );
 
+  $tables['dbtdiary_worksheetgp'] = 'dbtdiary_worksheetgp';
+  $tables['dbtdiary_worksheetgp_column'] = array(
+    'id'	=> 'id',
+    'uid'	=> 'uid',
+    'date'      => 'date',
+    'event'  =>  'event',
+    'objectives'  =>  'objectives',
+    'relationship'  =>  'relationship',
+    'selfrespect'  =>  'selfrespect',
+    'conflicts'  =>  'conflicts',
+    'wdorder'   => 'wdorder',
+    );
+  $tables['dbtdiary_worksheetgp_column_def'] = array(
+    'id'	=> 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
+    'uid'	=> 'I UNSIGNED',
+    'date'    => 'D NOTNULL',
+    'event'  =>  'X',
+    'objectives'  =>  'X',
+    'relationship'  =>  'X',
+    'selfrespect'  =>  'X',
+    'conflicts'  =>  'X',
+    'wdorder'   => '',
+    );
+
+  
 /* urges table, not using yet.
   $tables['dbtdiary_urges'] = 'dbtdiary_urges';
   $tables['dbtdiary_urges_column'] = array(

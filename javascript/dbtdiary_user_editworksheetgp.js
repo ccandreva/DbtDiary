@@ -19,6 +19,17 @@
             cursor: 'crosshair'
         });
         $( "#WantsDesires" ).disableSelection();
+        
+        // On submit, get order of Wants/Desires, put into hidden field.
+        $('form.z-form').submit(function() {
+            var a = '';
+            $('#WantsDesires label').each(function(index) {
+                //alert(index + ': ' + $(this).attr('for') );
+                if (a) a = a + ',';
+                a = a + $(this).attr('for');
+            });
+            $('#wdorder').prop('value', a);
+        });
     });
 
 }(jQuery) );

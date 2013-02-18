@@ -13,28 +13,39 @@ class DbtDiary_Form_Handler_EditWorksheetGP extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
-    var $uid, $id, $minigoal, $date;
-
+    var $uid, $id, $date, $formData;
+    var $wdText = array (
+        'objectives'   => 'Objectives: What specific results do I want ? What changes do I want this person to make ?',
+        'relationship' => 'Relationship: How do I want the other person to feel about me after the interaction ?',
+        'selfrespect'  => 'Self-Respect: How do I want to feel about myself after the interaction ?',
+    );
     /* Functions */
     public function __construct(&$args)
     {
         $this->uid = $args['uid'];
-        $this->minigoal = $args['minigoal'];
         $this->date = $args['date'];
         if (isset($args['id'])) $this->id = $args['id'];
     }
     
     public function initialize(Zikula_Form_View $view)
     {
-        $yesno = array();
         if (isset($this->id)) {
             $data = DBUtil::selectObjectByID('dbtdiary_worksheetgp', $this->id);
             if ($data['uid'] != $this->uid) {
                 return false;
             }
-            $this->view->assign($data);
+        } else {
+            $data = array('wdorder' => implode(',', array_keys($this->wdText)));
         }
-
+        /*
+        $formData = $this->view->getValues();
+        if (isset($formData)) {
+            $data['wdorder'] = $formData['wdorder'];
+        }
+        */
+        
+        $this->view->assign($data);
+        $this->view->assign('wdText', $this->wdText);
         return true;
     }
     
@@ -42,8 +53,11 @@ class DbtDiary_Form_Handler_EditWorksheetGP extends Zikula_Form_AbstractHandler
     {    
         $command = $args['commandName'];
         if ($command == 'save') {
-            if (!$this->view->isValid()) return false;
             $formData = $this->view->getValues();
+            LogUtil::registerStatus("Wdorder is " . $formData['wdorder']);
+            return true;
+            
+            if (!$this->view->isValid()) return false;
 
             if ($this->id) {
                 $formData['id'] = $this->id;
@@ -65,4 +79,3 @@ class DbtDiary_Form_Handler_EditWorksheetGP extends Zikula_Form_AbstractHandler
 
     
 }
-  
